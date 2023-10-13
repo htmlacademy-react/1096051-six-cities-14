@@ -95,7 +95,7 @@ function SixCitiesScreen({countOffersRent}: SixCitiesScreenProps): JSX.Element {
                 </ul>
               </form>
               <div className="cities__places-list places__list tabs__content">
-                {Array.from({length: countOffersRent}, (item: number, index: number) => <CitiesCard key={index}/>)}
+                {Array.from({length: countOffersRent}, (_, index: number) => <CitiesCard key={index}/>)}
               </div>
             </section>
             <div className="cities__right-section">
