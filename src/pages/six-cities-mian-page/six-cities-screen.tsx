@@ -1,4 +1,5 @@
 import CitiesCard from '../../components/cities-card/cities-card';
+import LocationsList from '../../components/locations/locations';
 
 type SixCitiesScreenProps = {
   countOffersRent: number;
@@ -40,7 +41,8 @@ function SixCitiesScreen({countOffersRent}: SixCitiesScreenProps): JSX.Element {
         <h1 className="visually-hidden">Cities</h1>
         <div className="tabs">
           <section className="locations container">
-            <ul className="locations__list tabs__list">
+            <LocationsList />
+            {/* <ul className="locations__list tabs__list">
               <li className="locations__item">
                 <a className="locations__item-link tabs__item" href="#">
                   <span>Paris</span>
@@ -71,7 +73,7 @@ function SixCitiesScreen({countOffersRent}: SixCitiesScreenProps): JSX.Element {
                   <span>Dusseldorf</span>
                 </a>
               </li>
-            </ul>
+            </ul> */}
           </section>
         </div>
         <div className="cities">
