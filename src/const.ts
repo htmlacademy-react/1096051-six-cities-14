@@ -2,6 +2,34 @@ import { nanoid } from 'nanoid';
 
 const COUNT_OFFERS_RENT: number = 6;
 
+const StarsRate = [
+  {
+    number: 5,
+    title: 'perfect',
+    id: nanoid()
+  },
+  {
+    number: 4,
+    title: 'good',
+    id: nanoid()
+  },
+  {
+    number: 3,
+    title: 'not bad',
+    id: nanoid()
+  },
+  {
+    number: 2,
+    title: 'badly',
+    id: nanoid()
+  },
+  {
+    number: 1,
+    title: 'terribly',
+    id: nanoid()
+  },
+];
+
 const CityNames: string[] = [
   'Paris',
   'Cologne',
@@ -11,9 +39,39 @@ const CityNames: string[] = [
   'Dusseldorf'
 ];
 
+type SortNamesType = {
+  name: string;
+  id: string;
+}[]
+
+const SortNames: SortNamesType = [
+  {
+    name: 'Popular',
+    id: nanoid()
+  },
+  {
+    name: 'Price: low to high',
+    id: nanoid()
+  },
+  {
+    name: 'Price: high to low',
+    id: nanoid()
+  },
+  {
+    name: 'Top rated first',
+    id: nanoid()
+  }
+];
+
 const CityNamesList = CityNames.map((name) => ({
   name,
   id: nanoid()
 }));
 
-export {COUNT_OFFERS_RENT, CityNamesList};
+const Section = {
+  DEFAULT: 'DEFAULT',
+  FAVORITE: 'FAVORITE',
+  OTHER: 'OTHER'
+} as const;
+
+export { COUNT_OFFERS_RENT, CityNamesList, SortNames, Section, StarsRate };

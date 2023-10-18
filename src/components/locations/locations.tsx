@@ -1,9 +1,14 @@
-import { CityNamesList } from '../../const';
-
 type LocationItemProps = {
   name: string;
   id: string;
 }
+
+type LocationsListProps = {
+  cityNames: {
+    name: string;
+    id: string;
+  }[];
+};
 
 function LocationItem({name, id}: LocationItemProps): JSX.Element {
   return (
@@ -15,8 +20,8 @@ function LocationItem({name, id}: LocationItemProps): JSX.Element {
   );
 }
 
-function LocationsList(): JSX.Element {
-  const locationItemsElements = CityNamesList.map(({name, id}) => (
+function LocationsList({cityNames}: LocationsListProps): JSX.Element {
+  const locationItemsElements = cityNames.map(({name, id}) => (
     <LocationItem name={name} id={id} key={id} />
   ));
 
