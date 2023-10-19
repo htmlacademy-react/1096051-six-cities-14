@@ -1,4 +1,19 @@
-function Header(): JSX.Element {
+type HeaderProps = {
+  user: {
+    avatarUrl: string;
+    email: string;
+    id: number;
+    isPro: boolean;
+    name: string;
+    token: string;
+  };
+}
+
+function Header({ user }: HeaderProps): JSX.Element {
+  const {
+    avatarUrl,
+    name
+  } = user;
   return (
     <header className="header">
       <div className="container">
@@ -12,9 +27,9 @@ function Header(): JSX.Element {
             <ul className="header__nav-list">
               <li className="header__nav-item user">
                 <a className="header__nav-link header__nav-link--profile" href="#">
-                  <div className="header__avatar-wrapper user__avatar-wrapper">
+                  <div className="header__avatar-wrapper user__avatar-wrapper" style={{ backgroundImage: `url(${avatarUrl})` }}>
                   </div>
-                  <span className="header__user-name user__name">Oliver.conner@gmail.com</span>
+                  <span className="header__user-name user__name">{name}</span>
                   <span className="header__favorite-count">3</span>
                 </a>
               </li>
@@ -27,7 +42,7 @@ function Header(): JSX.Element {
           </nav>
         </div>
       </div>
-    </header>
+    </header >
   );
 }
 

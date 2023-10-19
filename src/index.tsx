@@ -5,6 +5,8 @@ import { COUNT_OFFERS_RENT, CityNamesList, SortNames } from './const';
 import { createOfferDataList } from './mock/offer';
 import { getRandomPositiveInteger } from './utils/util';
 import { nanoid } from 'nanoid';
+import { getCommentDataList } from './mock/comment';
+import { getUserData } from './mock/user';
 
 const OFFERS_COUNT: number = 6;
 const currentSort = SortNames[getRandomPositiveInteger(0, SortNames.length - 1)];
@@ -84,6 +86,8 @@ root.render(
       currentSort={currentSort}
       sortNames={SortNames}
       favoriteCardList={getSortedFavoriteCardList()}
+      commentDataList={getCommentDataList()}
+      user={getUserData()}
     />
   </React.StrictMode>
 );

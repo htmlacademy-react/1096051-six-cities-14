@@ -3,22 +3,6 @@ import Footer from '../../components/footer/footer';
 import Header from '../../components/header/header';
 import { Section } from '../../const';
 
-type FavortitesScreenProps = {
-  favoriteCardList: {
-    id: string;
-    cityName: string;
-    dataList: {
-      isFavorite: boolean;
-      isPremium: boolean;
-      previewImage: string;
-      price: number;
-      rating: number;
-      title: string;
-      type: string;
-      id: string;
-    }[];
-  }[];
-};
 
 type FavoriteItemProps = {
   cityName: string;
@@ -51,10 +35,35 @@ function FavoriteItem({cityName, dataList}: FavoriteItemProps): JSX.Element {
   );
 }
 
-function FavortitesScreen({ favoriteCardList }: FavortitesScreenProps): JSX.Element {
+type FavortitesScreenProps = {
+  favoriteCardList: {
+    id: string;
+    cityName: string;
+    dataList: {
+      isFavorite: boolean;
+      isPremium: boolean;
+      previewImage: string;
+      price: number;
+      rating: number;
+      title: string;
+      type: string;
+      id: string;
+    }[];
+  }[];
+  user: {
+    avatarUrl: string;
+    email: string;
+    id: number;
+    isPro: boolean;
+    name: string;
+    token: string;
+  };
+};
+
+function FavortitesScreen({ favoriteCardList, user }: FavortitesScreenProps): JSX.Element {
   return (
     <div className="page">
-      <Header />
+      <Header user={user} />
       <main className="page__main page__main--favorites">
         <div className="page__favorites-container container">
           <section className="favorites">

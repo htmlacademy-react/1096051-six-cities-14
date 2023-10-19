@@ -75,6 +75,26 @@ type AppProps = {
       id: string;
     }[];
   }[];
+  commentDataList: {
+    comment: string;
+    date: string;
+    id: number;
+    rating: number;
+    user: {
+      avatarUrl: string;
+      id: number;
+      isPro: boolean;
+      name: string;
+    };
+  }[];
+  user: {
+    avatarUrl: string;
+    email: string;
+    id: number;
+    isPro: boolean;
+    name: string;
+    token: string;
+  };
 }
 
 function App({
@@ -84,7 +104,9 @@ function App({
   currentSort,
   sortNames,
   favoriteCardList,
-  offerData }: AppProps): JSX.Element {
+  offerData,
+  commentDataList,
+  user }: AppProps): JSX.Element {
   return (
     <>
       <SixCitiesScreen
@@ -93,9 +115,18 @@ function App({
         offerCardDataList={offerCardDataList}
         currentSort={currentSort}
         sortNames={sortNames}
+        user={user}
       />
-      <FavortitesScreen favoriteCardList={favoriteCardList} />
-      <OfferScreen offerData={offerData} offerCardDataList={offerCardDataList} />
+      <FavortitesScreen
+        favoriteCardList={favoriteCardList}
+        user={user}
+      />
+      <OfferScreen
+        offerData={offerData}
+        offerCardDataList={offerCardDataList}
+        commentDataList={commentDataList}
+        user={user}
+      />
     </>
   );
 }

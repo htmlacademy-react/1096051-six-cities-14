@@ -1,9 +1,26 @@
 import { StarsRate } from '../../const';
+import { getWidthRatingProperty } from '../../utils/util';
 
 type StarProps = {
   number: number;
   title: string;
 }
+
+type ReviewProps = {
+  commentDataList: {
+    comment: string;
+    date: string;
+    id: number;
+    rating: number;
+    user: {
+      avatarUrl: string;
+      id: number;
+      isPro: boolean;
+      name: string;
+    };
+  }[];
+}
+
 
 function Star({ number, title }: StarProps): JSX.Element {
   return (
@@ -26,33 +43,67 @@ function ReviewStars(): JSX.Element {
   );
 }
 
-function Review(): JSX.Element {
+type CommentProps = {
+  commentData: {
+    comment: string;
+    date: string;
+    id: number;
+    rating: number;
+    user: {
+      avatarUrl: string;
+      id: number;
+      isPro: boolean;
+      name: string;
+    };
+  };
+};
+
+function Comment({ commentData }: CommentProps): JSX.Element {
+  const {
+    comment,
+    date,
+    rating,
+    user
+  } = commentData;
+
+  const {
+    avatarUrl,
+    name,
+  } = user;
+
+  return (
+    <li className="reviews__item">
+      <div className="reviews__user user">
+        <div className="reviews__avatar-wrapper user__avatar-wrapper">
+          <img className="reviews__avatar user__avatar" src={avatarUrl} width="54" height="54" alt="Reviews avatar" />
+        </div>
+        <span className="reviews__user-name">
+          {name}
+        </span>
+      </div>
+      <div className="reviews__info">
+        <div className="reviews__rating rating">
+          <div className="reviews__stars rating__stars">
+            <span style={{ width: getWidthRatingProperty(rating) }}></span>
+            <span className="visually-hidden">Rating</span>
+          </div>
+        </div>
+        <p className="reviews__text">
+          {comment}
+        </p>
+        {/*to do Добавить дату */}
+        <time className="reviews__time" dateTime="2019-04-24">{date}</time>
+      </div>
+    </li>
+  );
+}
+
+function Review({ commentDataList }: ReviewProps): JSX.Element {
   return (
     <section className="offer__reviews reviews">
-      <h2 className="reviews__title">Reviews &middot; <span className="reviews__amount">1</span></h2>
+      <h2 className="reviews__title">Reviews &middot; <span className="reviews__amount">{commentDataList.length}</span></h2>
       <ul className="reviews__list">
-        <li className="reviews__item">
-          <div className="reviews__user user">
-            <div className="reviews__avatar-wrapper user__avatar-wrapper">
-              <img className="reviews__avatar user__avatar" src="img/avatar-max.jpg" width="54" height="54" alt="Reviews avatar" />
-            </div>
-            <span className="reviews__user-name">
-              Max
-            </span>
-          </div>
-          <div className="reviews__info">
-            <div className="reviews__rating rating">
-              <div className="reviews__stars rating__stars">
-                <span style={{ width: '80%' }}></span>
-                <span className="visually-hidden">Rating</span>
-              </div>
-            </div>
-            <p className="reviews__text">
-              A quiet cozy and picturesque that hides behind a a river by the unique lightness of Amsterdam. The building is green and from 18th century.
-            </p>
-            <time className="reviews__time" dateTime="2019-04-24">April 2019</time>
-          </div>
-        </li>
+        {commentDataList.map((data) => <Comment commentData={data} key={data.id} />)}
       </ul>
       <form className="reviews__form form" action="#" method="post">
         <label className="reviews__label form__label" htmlFor="review">Your review</label>

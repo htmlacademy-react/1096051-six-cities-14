@@ -55,13 +55,15 @@ function createOfferData() {
       'Heating'
     ],
     host: {
-      avatarUrl: 'img/1.png',
+      avatarUrl: 'img/avatar-angelina.jpg',
       id: 3,
       isPro: getRandomBoolean(),
       name: 'Angelina'
     },
     images: [
-      'img/1.png'
+      'img/apartment-01.jpg',
+      'img/apartment-02.jpg',
+      'img/apartment-03.jpg'
     ],
     isFavorite: getRandomBoolean(),
     isPremium: getRandomBoolean(),

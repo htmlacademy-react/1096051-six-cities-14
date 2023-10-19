@@ -1,6 +1,8 @@
 import { nanoid } from 'nanoid';
 
 const COUNT_OFFERS_RENT: number = 6;
+const COUNT_COMMENTS: number = 5;
+const MAX_RATING = 5;
 
 const StarsRate = [
   {
@@ -71,7 +73,8 @@ const CityNamesList = CityNames.map((name) => ({
 const Section = {
   DEFAULT: 'DEFAULT',
   FAVORITE: 'FAVORITE',
-  OTHER: 'OTHER'
+  OTHER: 'OTHER',
+  OFFER: 'OFFER'
 } as const;
 
-export { COUNT_OFFERS_RENT, CityNamesList, SortNames, Section, StarsRate };
+export { COUNT_OFFERS_RENT, CityNamesList, SortNames, Section, StarsRate, COUNT_COMMENTS, MAX_RATING };

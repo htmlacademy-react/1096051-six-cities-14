@@ -29,6 +29,14 @@ type SixCitiesScreenProps = {
     name: string;
     id: string;
   }[];
+  user: {
+    avatarUrl: string;
+    email: string;
+    id: number;
+    isPro: boolean;
+    name: string;
+    token: string;
+  };
 };
 
 
@@ -37,10 +45,11 @@ function SixCitiesScreen({
   cityNames,
   offerCardDataList,
   currentSort,
-  sortNames }: SixCitiesScreenProps): JSX.Element {
+  sortNames,
+  user }: SixCitiesScreenProps): JSX.Element {
   return (
     <div className="page page--gray page--main">
-      <Header />
+      <Header user={user}/>
       <main className="page__main page__main--index">
         <h1 className="visually-hidden">Cities</h1>
         <div className="tabs">

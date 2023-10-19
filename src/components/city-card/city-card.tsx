@@ -1,7 +1,6 @@
 import { Section } from '../../const';
-
-
-const MAX_RATING = 5;
+import { getWidthRatingProperty } from '../../utils/util';
+import Bookmark from '../bookmark/bookmark';
 
 type CitiesCardProps = {
   section: string;
@@ -27,7 +26,7 @@ function CityCard({ data, section = Section.DEFAULT }: CitiesCardProps): JSX.Ele
     type,
     previewImage
   } = data;
-  const ratingWidth: string = `${(Math.round(rating) / (MAX_RATING / 100)).toFixed(0)}%`;
+
   let containerClassName: string;
   switch (section) {
     case Section.FAVORITE:
@@ -57,16 +56,11 @@ function CityCard({ data, section = Section.DEFAULT }: CitiesCardProps): JSX.Ele
             <b className="place-card__price-value">&euro;{price}</b>
             <span className="place-card__price-text">&#47;&nbsp;night</span>
           </div>
-          <button className={`place-card__bookmark-button ${isFavorite ? 'place-card__bookmark-button--active' : ''} button`} type="button">
-            <svg className="place-card__bookmark-icon" width="18" height="19">
-              <use xlinkHref="#icon-bookmark"></use>
-            </svg>
-            <span className="visually-hidden">{isFavorite ? 'In bookmarks' : 'To bookmarks'}</span>
-          </button>
+          <Bookmark isFavorite={isFavorite} section={Section.DEFAULT}/>
         </div>
         <div className="place-card__rating rating">
           <div className="place-card__stars rating__stars">
-            <span style={{ width: ratingWidth }}></span>
+            <span style={{ width: getWidthRatingProperty(rating) }}></span>
             <span className="visually-hidden">Rating</span>
           </div>
         </div>
