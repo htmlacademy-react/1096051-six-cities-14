@@ -1,7 +1,7 @@
 export type CommentDataType = {
   comment: string;
   date: string;
-  id: number;
+  id: string;
   rating: number;
   user: {
     avatarUrl: string;
@@ -10,16 +10,3 @@ export type CommentDataType = {
     name: string;
   };
 }
-
-export type CommentDataListType = {
-  comment: string;
-  date: string;
-  id: number;
-  rating: number;
-  user: {
-    avatarUrl: string;
-    id: number;
-    isPro: boolean;
-    name: string;
-  };
-}[];

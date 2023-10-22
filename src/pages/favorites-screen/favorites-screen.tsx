@@ -1,11 +1,8 @@
 import CityCard from '../../components/city-card/city-card';
-import Footer from '../../components/footer/footer';
-import Header from '../../components/header/header';
 import { Section } from '../../const';
 import { FavoriteCardListType, FavoriteItemDataType } from '../../types/FavoriteCard.type';
-import { UserType } from '../../types/User.type';
 
-function FavoriteItem({cityName, dataList}: FavoriteItemDataType): JSX.Element {
+function FavoriteItem({ cityName, dataList }: FavoriteItemDataType): JSX.Element {
   return (
     <li className="favorites__locations-items">
       <div className="favorites__locations locations locations--current">
@@ -24,25 +21,20 @@ function FavoriteItem({cityName, dataList}: FavoriteItemDataType): JSX.Element {
 
 type FavortitesScreenProps = {
   favoriteCardList: FavoriteCardListType;
-  user: UserType;
 };
 
-function FavortitesScreen({ favoriteCardList, user }: FavortitesScreenProps): JSX.Element {
+function FavortitesScreen({ favoriteCardList }: FavortitesScreenProps): JSX.Element {
   return (
-    <div className="page">
-      <Header user={user} />
-      <main className="page__main page__main--favorites">
-        <div className="page__favorites-container container">
-          <section className="favorites">
-            <h1 className="favorites__title">Saved listing</h1>
-            <ul className="favorites__list">
-              {favoriteCardList.map(({cityName, dataList, id}) => <FavoriteItem cityName={cityName} dataList={dataList} key={id} />)}
-            </ul>
-          </section>
-        </div>
-      </main>
-      <Footer />
-    </div>
+    <main className="page__main page__main--favorites">
+      <div className="page__favorites-container container">
+        <section className="favorites">
+          <h1 className="favorites__title">Saved listing</h1>
+          <ul className="favorites__list">
+            {favoriteCardList.map(({ cityName, dataList, id }) => <FavoriteItem cityName={cityName} dataList={dataList} key={id} />)}
+          </ul>
+        </section>
+      </div>
+    </main>
   );
 }
 

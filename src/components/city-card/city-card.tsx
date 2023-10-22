@@ -1,3 +1,4 @@
+import { Link } from 'react-router-dom';
 import { Section } from '../../const';
 import { CardData } from '../../types/CardData.type';
 import { getWidthRatingProperty } from '../../utils/util';
@@ -9,12 +10,14 @@ type CitiesCardProps = {
 };
 
 function CityCard({ data, section = Section.DEFAULT }: CitiesCardProps): JSX.Element {
+
   const {
     isPremium,
     isFavorite,
     price,
     rating,
     title,
+    id,
     type,
     previewImage
   } = data;
@@ -38,9 +41,9 @@ function CityCard({ data, section = Section.DEFAULT }: CitiesCardProps): JSX.Ele
           <span>Premium</span>
         </div> : ''}
       <div className={`${containerClassName}__image-wrapper place-card__image-wrapper`}>
-        <a href="#">
+        <Link to={`offer/${id}`}>
           <img className="place-card__image" src={previewImage} width="260" height="200" alt="Place image" />
-        </a>
+        </Link>
       </div>
       <div className="place-card__info">
         <div className="place-card__price-wrapper">
@@ -57,7 +60,7 @@ function CityCard({ data, section = Section.DEFAULT }: CitiesCardProps): JSX.Ele
           </div>
         </div>
         <h2 className="place-card__name">
-          <a href="#">{title}</a>
+          <Link to={`offer/${id}`}>{title}</Link>
         </h2>
         <p className="place-card__type">{type}</p>
       </div>

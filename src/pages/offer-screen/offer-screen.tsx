@@ -1,44 +1,42 @@
+import { useParams } from 'react-router-dom';
 import Bookmark from '../../components/bookmark/bookmark';
 import CityCard from '../../components/city-card/city-card';
 import Features from '../../components/features/features';
 import Gallery from '../../components/gallery/gallery';
-import Header from '../../components/header/header';
 import Host from '../../components/host/host';
 import Map from '../../components/map/map';
 import OfferGoods from '../../components/offer-goods/offer-goods';
 import Review from '../../components/review/review';
 import { Section } from '../../const';
 import { CommentDataType } from '../../types/CommentData.type';
-import { OfferCardDataType, OfferDataType } from '../../types/OfferData.type';
-import { UserType } from '../../types/User.type';
+import { OfferDataType } from '../../types/OfferData.type';
 import { getWidthRatingProperty } from '../../utils/util';
 
 type OfferScreenProps = {
-  offerData: OfferDataType;
-  offerCardDataList: OfferCardDataType[];
+  offerCardDataList: OfferDataType[];
   commentDataList: CommentDataType[];
-  user: UserType;
 }
 
-function OfferScreen({ offerData, offerCardDataList, commentDataList, user }: OfferScreenProps): JSX.Element {
-  const {
-    host,
-    description,
-    goods,
-    price,
-    maxAdults,
-    type,
-    bedrooms,
-    rating,
-    isFavorite,
-    title,
-    isPremium,
-    images
-  } = offerData;
+function OfferScreen({ offerCardDataList, commentDataList }: OfferScreenProps): JSX.Element {
+  const paramID = useParams().id;
+  const offerData = offerCardDataList.find(({ id }) => id === paramID);
+  if (offerData) {
+    const {
+      host,
+      description,
+      goods,
+      price,
+      maxAdults,
+      type,
+      bedrooms,
+      rating,
+      isFavorite,
+      title,
+      isPremium,
+      images
+    } = offerData;
 
-  return (
-    <div className="page">
-      <Header user={user}/>
+    return (
       <main className="page__main page__main--offer">
         <section className="offer">
           <Gallery images={images} />
@@ -82,8 +80,14 @@ function OfferScreen({ offerData, offerCardDataList, commentDataList, user }: Of
           </section>
         </div>
       </main>
-    </div>
+    );
+  }
+
+  return (
+    <>
+    </>
   );
+
 }
 
 export default OfferScreen;

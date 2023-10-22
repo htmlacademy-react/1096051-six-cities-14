@@ -1,15 +1,9 @@
-import { CardData } from './CardData.type';
-
 export type HostType = {
   avatarUrl: string;
   id: number;
   isPro: boolean;
   name: string;
 }
-
-export type OfferCardDataType = CardData & {
-  cityName: string;
-};
 
 export type OfferDataType = {
   bedrooms: number;

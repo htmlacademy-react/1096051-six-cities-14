@@ -11,7 +11,7 @@ type ReviewProps = {
   commentDataList: {
     comment: string;
     date: string;
-    id: number;
+    id: string;
     rating: number;
     user: {
       avatarUrl: string;

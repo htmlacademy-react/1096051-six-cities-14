@@ -8,7 +8,7 @@ function createCommentData() {
   const commentData: CommentDataType = {
     comment: nanoid(),
     date: 'Wed Oct 18 2023 18:54:09 GMT+1000 (Владивосток, стандартное время)',
-    id: 1,
+    id: nanoid(),
     rating: getRandomPositiveInteger(0, MAX_RATING),
     user: {
       avatarUrl: 'img/avatar-max.jpg',

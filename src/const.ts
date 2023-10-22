@@ -75,4 +75,13 @@ const Section = {
   OFFER: 'OFFER'
 } as const;
 
-export { COUNT_OFFERS_RENT, CityNamesList, SortNames, Section, StarsRate, COUNT_COMMENTS, MAX_RATING };
+const PagePaths = {
+  MAIN: '/',
+  FAVORITES: '/favorites',
+  LOGIN: '/login',
+  OFFER: '/offer',
+};
+
+const HAS_ACCESS: boolean = false;
+
+export { COUNT_OFFERS_RENT, CityNamesList, SortNames, Section, StarsRate, COUNT_COMMENTS, MAX_RATING, PagePaths, HAS_ACCESS };

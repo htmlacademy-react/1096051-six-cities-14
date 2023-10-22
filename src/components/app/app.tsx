@@ -1,22 +1,27 @@
+import { ErrorScreen } from '../../pages/error-screen/error-screen';
 import FavortitesScreen from '../../pages/favorites-screen/favorites-screen';
+import { Layout } from '../../pages/layout/layout';
+import LoginScreen from '../../pages/login-screen/login-screen';
 import OfferScreen from '../../pages/offer-screen/offer-screen';
 import SixCitiesScreen from '../../pages/six-cities-mian-page/six-cities-screen';
-import { CommentDataListType } from '../../types/CommentData.type';
 import { FavoriteCardListType } from '../../types/FavoriteCard.type';
-import { OfferCardDataType, OfferDataType } from '../../types/OfferData.type';
 import { UniversalType } from '../../types/UniversalType.type';
 import { UserType } from '../../types/User.type';
+import { BrowserRouter, Routes, Route } from 'react-router-dom';
+import { PrivateRouter } from '../private-route/private-route';
+import { CommentDataType } from '../../types/CommentData.type';
+import { OfferDataType } from '../../types/OfferData.type';
 
 type AppProps = {
   countOffersRent: number;
   cityNames: UniversalType[];
-  offerData: OfferDataType;
-  offerCardDataList: OfferCardDataType[];
+  offerCardDataList: OfferDataType[];
   currentSort: UniversalType;
   sortNames: UniversalType[];
   favoriteCardList: FavoriteCardListType;
-  commentDataList: CommentDataListType;
+  commentDataList: CommentDataType[];
   user: UserType;
+  hasAccess: boolean;
 }
 
 function App({
@@ -26,30 +31,46 @@ function App({
   currentSort,
   sortNames,
   favoriteCardList,
-  offerData,
   commentDataList,
-  user }: AppProps): JSX.Element {
+  user,
+  hasAccess }: AppProps): JSX.Element {
   return (
-    <>
-      <SixCitiesScreen
-        countOffersRent={countOffersRent}
-        cityNames={cityNames}
-        offerCardDataList={offerCardDataList}
-        currentSort={currentSort}
-        sortNames={sortNames}
-        user={user}
-      />
-      <FavortitesScreen
-        favoriteCardList={favoriteCardList}
-        user={user}
-      />
-      <OfferScreen
-        offerData={offerData}
-        offerCardDataList={offerCardDataList}
-        commentDataList={commentDataList}
-        user={user}
-      />
-    </>
+    <BrowserRouter>
+      <Routes>
+        <Route path="/" element={<Layout user={user} />}>
+          <Route index element={
+            <SixCitiesScreen
+              countOffersRent={countOffersRent}
+              cityNames={cityNames}
+              offerCardDataList={offerCardDataList}
+              currentSort={currentSort}
+              sortNames={sortNames}
+            />
+          }
+          />
+          <Route path='favorites' element={
+            <PrivateRouter hasAccess={hasAccess}>
+              <FavortitesScreen
+                favoriteCardList={favoriteCardList}
+              />
+            </PrivateRouter>
+          }
+          />
+          <Route path='offer/:id' element={
+            <OfferScreen
+              offerCardDataList={offerCardDataList}
+              commentDataList={commentDataList}
+            />
+          }
+          />
+          <Route path='login' element={
+            <LoginScreen />
+          }
+          />
+          <Route path='*' element={<ErrorScreen />}></Route>
+        </Route>
+      </Routes>
+    </BrowserRouter >
   );
 }
 
