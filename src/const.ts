@@ -75,12 +75,12 @@ const Section = {
   OFFER: 'OFFER'
 } as const;
 
-const PagePaths = {
-  MAIN: '/',
-  FAVORITES: '/favorites',
-  LOGIN: '/login',
-  OFFER: '/offer',
-};
+enum PagePaths {
+  MAIN = '/',
+  FAVORITES = '/favorites',
+  LOGIN = '/login',
+  OFFER = '/offer',
+}
 
 const HAS_ACCESS: boolean = false;
 

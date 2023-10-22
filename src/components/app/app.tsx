@@ -11,6 +11,7 @@ import { BrowserRouter, Routes, Route } from 'react-router-dom';
 import { PrivateRouter } from '../private-route/private-route';
 import { CommentDataType } from '../../types/CommentData.type';
 import { OfferDataType } from '../../types/OfferData.type';
+import { PagePaths } from '../../const';
 
 type AppProps = {
   countOffersRent: number;
@@ -37,7 +38,7 @@ function App({
   return (
     <BrowserRouter>
       <Routes>
-        <Route path="/" element={<Layout user={user} />}>
+        <Route path={PagePaths.MAIN} element={<Layout user={user} />}>
           <Route index element={
             <SixCitiesScreen
               countOffersRent={countOffersRent}
@@ -48,7 +49,7 @@ function App({
             />
           }
           />
-          <Route path='favorites' element={
+          <Route path={PagePaths.FAVORITES} element={
             <PrivateRouter hasAccess={hasAccess}>
               <FavortitesScreen
                 favoriteCardList={favoriteCardList}
@@ -56,14 +57,14 @@ function App({
             </PrivateRouter>
           }
           />
-          <Route path='offer/:id' element={
+          <Route path={`${PagePaths.OFFER}/:id`} element={
             <OfferScreen
               offerCardDataList={offerCardDataList}
               commentDataList={commentDataList}
             />
           }
           />
-          <Route path='login' element={
+          <Route path={PagePaths.LOGIN} element={
             <LoginScreen />
           }
           />

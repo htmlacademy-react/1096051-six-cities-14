@@ -7,7 +7,7 @@ import Host from '../../components/host/host';
 import Map from '../../components/map/map';
 import OfferGoods from '../../components/offer-goods/offer-goods';
 import Review from '../../components/review/review';
-import { Section } from '../../const';
+import { PagePaths, Section } from '../../const';
 import { CommentDataType } from '../../types/CommentData.type';
 import { OfferDataType } from '../../types/OfferData.type';
 import { getWidthRatingProperty } from '../../utils/util';
@@ -84,7 +84,7 @@ function OfferScreen({ offerCardDataList, commentDataList }: OfferScreenProps): 
   }
 
   return (
-    <Navigate to={'/'}></Navigate>
+    <Navigate to={PagePaths.MAIN}></Navigate>
   );
 
 }

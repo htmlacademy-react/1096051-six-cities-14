@@ -1,4 +1,5 @@
 import { Link } from 'react-router-dom';
+import { PagePaths } from '../../const';
 
 function ErrorScreen(): JSX.Element {
   return (
@@ -10,7 +11,7 @@ function ErrorScreen(): JSX.Element {
       }
       >Error 404. Page not found.
       </h1>
-      <Link to={'/'} style={
+      <Link to={PagePaths.MAIN} style={
         {
           display: 'block',
 
