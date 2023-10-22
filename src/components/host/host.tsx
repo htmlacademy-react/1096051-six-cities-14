@@ -1,10 +1,7 @@
+import { HostType } from '../../types/OfferData.type';
+
 type HostPorps = {
-  host: {
-    avatarUrl: string;
-    id: number;
-    isPro: boolean;
-    name: string;
-  };
+  host: HostType;
   description: string;
 }
 

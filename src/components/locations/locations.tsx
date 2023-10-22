@@ -1,14 +1,6 @@
-type LocationItemProps = {
-  name: string;
-  id: string;
-}
+import { UniversalType } from '../../types/UniversalType.type';
 
-type LocationsListProps = {
-  cityNames: {
-    name: string;
-    id: string;
-  }[];
-};
+type LocationItemProps = UniversalType
 
 function LocationItem({name, id}: LocationItemProps): JSX.Element {
   return (
@@ -19,6 +11,10 @@ function LocationItem({name, id}: LocationItemProps): JSX.Element {
     </li>
   );
 }
+
+type LocationsListProps = {
+  cityNames: UniversalType[];
+};
 
 function LocationsList({cityNames}: LocationsListProps): JSX.Element {
   const locationItemsElements = cityNames.map(({name, id}) => (

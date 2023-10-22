@@ -1,4 +1,5 @@
 import { nanoid } from 'nanoid';
+import { UniversalType } from './types/UniversalType.type';
 
 const COUNT_OFFERS_RENT: number = 6;
 const COUNT_COMMENTS: number = 5;
@@ -41,10 +42,7 @@ const CityNames: string[] = [
   'Dusseldorf'
 ];
 
-type SortNamesType = {
-  name: string;
-  id: string;
-}[]
+type SortNamesType = UniversalType[]
 
 const SortNames: SortNamesType = [
   {

@@ -1,12 +1,8 @@
+import { UniversalType } from '../../types/UniversalType.type';
+
 type SortProps = {
-  currentSort: {
-    name: string;
-    id: string;
-  };
-  sortNames: {
-    name: string;
-    id: string;
-  }[];
+  currentSort: UniversalType;
+  sortNames: UniversalType[];
 }
 
 type SortItemProps = {

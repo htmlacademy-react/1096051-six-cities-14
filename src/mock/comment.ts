@@ -1,23 +1,11 @@
 import { nanoid } from 'nanoid';
 import { COUNT_COMMENTS, MAX_RATING } from '../const';
 import { getRandomPositiveInteger } from '../utils/util';
+import { CommentDataType } from '../types/CommentData.type';
 
 
 function createCommentData() {
-  type commentDataType = {
-    comment: string;
-    date: string;
-    id: number;
-    rating: number;
-    user: {
-      avatarUrl: string;
-      id: number;
-      isPro: boolean;
-      name: string;
-    };
-  }
-
-  const commentData: commentDataType = {
+  const commentData: CommentDataType = {
     comment: nanoid(),
     date: 'Wed Oct 18 2023 18:54:09 GMT+1000 (Владивосток, стандартное время)',
     id: 1,

@@ -2,23 +2,10 @@ import CityCard from '../../components/city-card/city-card';
 import Footer from '../../components/footer/footer';
 import Header from '../../components/header/header';
 import { Section } from '../../const';
+import { FavoriteCardListType, FavoriteItemDataType } from '../../types/FavoriteCard.type';
+import { UserType } from '../../types/User.type';
 
-
-type FavoriteItemProps = {
-  cityName: string;
-  dataList: {
-    isFavorite: boolean;
-    isPremium: boolean;
-    previewImage: string;
-    price: number;
-    rating: number;
-    title: string;
-    type: string;
-    id: string;
-  }[];
-}
-
-function FavoriteItem({cityName, dataList}: FavoriteItemProps): JSX.Element {
+function FavoriteItem({cityName, dataList}: FavoriteItemDataType): JSX.Element {
   return (
     <li className="favorites__locations-items">
       <div className="favorites__locations locations locations--current">
@@ -36,28 +23,8 @@ function FavoriteItem({cityName, dataList}: FavoriteItemProps): JSX.Element {
 }
 
 type FavortitesScreenProps = {
-  favoriteCardList: {
-    id: string;
-    cityName: string;
-    dataList: {
-      isFavorite: boolean;
-      isPremium: boolean;
-      previewImage: string;
-      price: number;
-      rating: number;
-      title: string;
-      type: string;
-      id: string;
-    }[];
-  }[];
-  user: {
-    avatarUrl: string;
-    email: string;
-    id: number;
-    isPro: boolean;
-    name: string;
-    token: string;
-  };
+  favoriteCardList: FavoriteCardListType;
+  user: UserType;
 };
 
 function FavortitesScreen({ favoriteCardList, user }: FavortitesScreenProps): JSX.Element {

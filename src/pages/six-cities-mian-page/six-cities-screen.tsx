@@ -4,39 +4,17 @@ import LocationsList from '../../components/locations/locations';
 import Map from '../../components/map/map';
 import Sort from '../../components/sort/sort';
 import { Section } from '../../const';
+import { OfferCardDataType } from '../../types/OfferData.type';
+import { UniversalType } from '../../types/UniversalType.type';
+import { UserType } from '../../types/User.type';
 
 type SixCitiesScreenProps = {
   countOffersRent: number;
-  cityNames: {
-    name: string;
-    id: string;
-  }[];
-  offerCardDataList: {
-    isFavorite: boolean;
-    isPremium: boolean;
-    previewImage: string;
-    price: number;
-    rating: number;
-    title: string;
-    type: string;
-    id: string;
-  }[];
-  currentSort: {
-    name: string;
-    id: string;
-  };
-  sortNames: {
-    name: string;
-    id: string;
-  }[];
-  user: {
-    avatarUrl: string;
-    email: string;
-    id: number;
-    isPro: boolean;
-    name: string;
-    token: string;
-  };
+  cityNames: UniversalType[];
+  offerCardDataList: OfferCardDataType[];
+  currentSort: UniversalType;
+  sortNames: UniversalType[];
+  user: UserType;
 };
 
 

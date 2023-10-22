@@ -8,74 +8,16 @@ import Map from '../../components/map/map';
 import OfferGoods from '../../components/offer-goods/offer-goods';
 import Review from '../../components/review/review';
 import { Section } from '../../const';
+import { CommentDataType } from '../../types/CommentData.type';
+import { OfferCardDataType, OfferDataType } from '../../types/OfferData.type';
+import { UserType } from '../../types/User.type';
 import { getWidthRatingProperty } from '../../utils/util';
 
 type OfferScreenProps = {
-  offerData: {
-    bedrooms: number;
-    city: {
-      location: {
-        latitude: number;
-        longitude: number;
-        zoom: number;
-      };
-      name: string;
-    };
-    description: string;
-    goods: string[];
-    host: {
-      avatarUrl: string;
-      id: number;
-      isPro: boolean;
-      name: string;
-    };
-    images: string[];
-    isFavorite: boolean;
-    isPremium: boolean;
-    location: {
-      latitude: number;
-      longitude: number;
-      zoom: number;
-    };
-    maxAdults: number;
-    previewImage: string;
-    price: number;
-    rating: number;
-    title: string;
-    type: string;
-    id: string;
-  };
-  offerCardDataList: {
-    cityName: string;
-    isFavorite: boolean;
-    isPremium: boolean;
-    previewImage: string;
-    price: number;
-    rating: number;
-    title: string;
-    type: string;
-    id: string;
-  }[];
-  commentDataList: {
-    comment: string;
-    date: string;
-    id: number;
-    rating: number;
-    user: {
-      avatarUrl: string;
-      id: number;
-      isPro: boolean;
-      name: string;
-    };
-  }[];
-  user: {
-    avatarUrl: string;
-    email: string;
-    id: number;
-    isPro: boolean;
-    name: string;
-    token: string;
-  };
+  offerData: OfferDataType;
+  offerCardDataList: OfferCardDataType[];
+  commentDataList: CommentDataType[];
+  user: UserType;
 }
 
 function OfferScreen({ offerData, offerCardDataList, commentDataList, user }: OfferScreenProps): JSX.Element {

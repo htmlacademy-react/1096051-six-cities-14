@@ -1,4 +1,5 @@
 import { StarsRate } from '../../const';
+import { CommentDataType } from '../../types/CommentData.type';
 import { getWidthRatingProperty } from '../../utils/util';
 
 type StarProps = {
@@ -44,18 +45,7 @@ function ReviewStars(): JSX.Element {
 }
 
 type CommentProps = {
-  commentData: {
-    comment: string;
-    date: string;
-    id: number;
-    rating: number;
-    user: {
-      avatarUrl: string;
-      id: number;
-      isPro: boolean;
-      name: string;
-    };
-  };
+  commentData: CommentDataType;
 };
 
 function Comment({ commentData }: CommentProps): JSX.Element {

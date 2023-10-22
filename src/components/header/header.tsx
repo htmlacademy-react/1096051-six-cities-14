@@ -1,12 +1,7 @@
+import { UserType } from '../../types/User.type';
+
 type HeaderProps = {
-  user: {
-    avatarUrl: string;
-    email: string;
-    id: number;
-    isPro: boolean;
-    name: string;
-    token: string;
-  };
+  user: UserType;
 }
 
 function Header({ user }: HeaderProps): JSX.Element {

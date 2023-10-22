@@ -7,6 +7,7 @@ import { getRandomPositiveInteger } from './utils/util';
 import { nanoid } from 'nanoid';
 import { getCommentDataList } from './mock/comment';
 import { getUserData } from './mock/user';
+import { FavoriteCardListType } from './types/FavoriteCard.type';
 
 const OFFERS_COUNT: number = 6;
 const currentSort = SortNames[getRandomPositiveInteger(0, SortNames.length - 1)];
@@ -42,25 +43,10 @@ const offerCardDataList = offersDataList.map((offerData) => {
 function getSortedFavoriteCardList() {
   const favoriteCardList = offerCardDataList
     .filter(({ isFavorite }) => isFavorite);
-  const cityNamesList = favoriteCardList.map(({cityName}) => cityName);
+  const cityNamesList = favoriteCardList.map(({ cityName }) => cityName);
 
-  type sortedFavoriteCardListType = {
-    id: string;
-    cityName: string;
-    dataList:{
-      isFavorite: boolean;
-      isPremium: boolean;
-      previewImage: string;
-      price: number;
-      rating: number;
-      title: string;
-      type: string;
-      id: string;
-    }[];
-  }[]
-
-  const sortedFavoriteCardList: sortedFavoriteCardListType = cityNamesList.map((name) => {
-    const dataList = favoriteCardList.filter(({cityName}) => cityName === name).map(({...data}) => data);
+  const sortedFavoriteCardList: FavoriteCardListType = cityNamesList.map((name) => {
+    const dataList = favoriteCardList.filter(({ cityName }) => cityName === name).map(({ ...data }) => data);
 
     return {
       id: nanoid(),

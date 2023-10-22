@@ -1,19 +1,11 @@
 import { Section } from '../../const';
+import { CardData } from '../../types/CardData.type';
 import { getWidthRatingProperty } from '../../utils/util';
 import Bookmark from '../bookmark/bookmark';
 
 type CitiesCardProps = {
   section: string;
-  data: {
-    isFavorite: boolean;
-    isPremium: boolean;
-    previewImage: string;
-    price: number;
-    rating: number;
-    title: string;
-    type: string;
-    id: string;
-  };
+  data: CardData;
 };
 
 function CityCard({ data, section = Section.DEFAULT }: CitiesCardProps): JSX.Element {
