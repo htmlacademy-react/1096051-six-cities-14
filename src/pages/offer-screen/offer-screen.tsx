@@ -1,4 +1,4 @@
-import { useParams } from 'react-router-dom';
+import { Navigate, useParams } from 'react-router-dom';
 import Bookmark from '../../components/bookmark/bookmark';
 import CityCard from '../../components/city-card/city-card';
 import Features from '../../components/features/features';
@@ -84,8 +84,7 @@ function OfferScreen({ offerCardDataList, commentDataList }: OfferScreenProps): 
   }
 
   return (
-    <>
-    </>
+    <Navigate to={'/'}></Navigate>
   );
 
 }
