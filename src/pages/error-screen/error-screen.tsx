@@ -1,9 +1,11 @@
 import { Link } from 'react-router-dom';
 import { PagePaths } from '../../const';
+import { Helmet } from 'react-helmet-async';
 
 function ErrorScreen(): JSX.Element {
   return (
     <main className="page__main page__main--error">
+      <Helmet title="404"></Helmet>
       <h1 className="page__title" style={
         {
           textAlign: 'center'

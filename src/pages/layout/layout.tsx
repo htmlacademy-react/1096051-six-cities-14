@@ -9,7 +9,14 @@ type LayoutProps = {
 }
 
 function getPageClassName(currentPage: string): string | undefined {
-  return currentPage === PagePaths.MAIN ? 'page--gray page--main' : '';
+  switch (currentPage) {
+    case PagePaths.MAIN:
+      return 'page--gray page--main';
+    case PagePaths.LOGIN:
+      return 'page--gray page--login';
+    default:
+      return '';
+  }
 }
 
 function Layout({user}: LayoutProps): JSX.Element {

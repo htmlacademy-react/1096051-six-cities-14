@@ -1,3 +1,4 @@
+import { Helmet } from 'react-helmet-async';
 import CityCard from '../../components/city-card/city-card';
 import LocationsList from '../../components/locations/locations';
 import Map from '../../components/map/map';
@@ -23,6 +24,7 @@ function SixCitiesScreen({
   sortNames }: SixCitiesScreenProps): JSX.Element {
   return (
     <main className="page__main page__main--index">
+      <Helmet title="6 Cities"></Helmet>
       <h1 className="visually-hidden">Cities</h1>
       <div className="tabs">
         <section className="locations container">

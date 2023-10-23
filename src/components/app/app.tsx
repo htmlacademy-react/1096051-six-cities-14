@@ -12,6 +12,7 @@ import { PrivateRouter } from '../private-route/private-route';
 import { CommentDataType } from '../../types/CommentData.type';
 import { OfferDataType } from '../../types/OfferData.type';
 import { PagePaths } from '../../const';
+import { HelmetProvider } from 'react-helmet-async';
 
 type AppProps = {
   countOffersRent: number;
@@ -36,42 +37,46 @@ function App({
   user,
   hasAccess }: AppProps): JSX.Element {
   return (
-    <BrowserRouter>
-      <Routes>
-        <Route path={PagePaths.MAIN} element={<Layout user={user} />}>
-          <Route index element={
-            <SixCitiesScreen
-              countOffersRent={countOffersRent}
-              cityNames={cityNames}
-              offerCardDataList={offerCardDataList}
-              currentSort={currentSort}
-              sortNames={sortNames}
-            />
-          }
-          />
-          <Route path={PagePaths.FAVORITES} element={
-            <PrivateRouter hasAccess={hasAccess}>
-              <FavortitesScreen
-                favoriteCardList={favoriteCardList}
+    <HelmetProvider>
+      <BrowserRouter>
+        <Routes>
+          <Route path={PagePaths.MAIN} element={<Layout user={user} />}>
+            <Route index element={
+              <SixCitiesScreen
+                countOffersRent={countOffersRent}
+                cityNames={cityNames}
+                offerCardDataList={offerCardDataList}
+                currentSort={currentSort}
+                sortNames={sortNames}
               />
-            </PrivateRouter>
-          }
-          />
-          <Route path={`${PagePaths.OFFER}/:id`} element={
-            <OfferScreen
-              offerCardDataList={offerCardDataList}
-              commentDataList={commentDataList}
+            }
             />
-          }
-          />
-          <Route path={PagePaths.LOGIN} element={
-            <LoginScreen />
-          }
-          />
-          <Route path='*' element={<ErrorScreen />}></Route>
-        </Route>
-      </Routes>
-    </BrowserRouter >
+            <Route path={PagePaths.FAVORITES} element={
+              <PrivateRouter hasAccess={hasAccess} deniedPath={PagePaths.LOGIN}>
+                <FavortitesScreen
+                  favoriteCardList={favoriteCardList}
+                />
+              </PrivateRouter>
+            }
+            />
+            <Route path={`${PagePaths.OFFER}/:id`} element={
+              <OfferScreen
+                offerCardDataList={offerCardDataList}
+                commentDataList={commentDataList}
+              />
+            }
+            />
+            <Route path={PagePaths.LOGIN} element={
+              <PrivateRouter hasAccess={!hasAccess} deniedPath={PagePaths.MAIN}>
+                <LoginScreen />
+              </PrivateRouter>
+            }
+            />
+            <Route path='*' element={<ErrorScreen />}></Route>
+          </Route>
+        </Routes>
+      </BrowserRouter >
+    </HelmetProvider>
   );
 }
 

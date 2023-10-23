@@ -1,3 +1,4 @@
+import { Helmet } from 'react-helmet-async';
 import CityCard from '../../components/city-card/city-card';
 import { Section } from '../../const';
 import { FavoriteCardListType, FavoriteItemDataType } from '../../types/FavoriteCard.type';
@@ -26,6 +27,7 @@ type FavortitesScreenProps = {
 function FavortitesScreen({ favoriteCardList }: FavortitesScreenProps): JSX.Element {
   return (
     <main className="page__main page__main--favorites">
+      <Helmet title="Favorites"></Helmet>
       <div className="page__favorites-container container">
         <section className="favorites">
           <h1 className="favorites__title">Saved listing</h1>

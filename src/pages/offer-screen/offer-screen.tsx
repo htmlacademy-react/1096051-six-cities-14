@@ -11,6 +11,7 @@ import { PagePaths, Section } from '../../const';
 import { CommentDataType } from '../../types/CommentData.type';
 import { OfferDataType } from '../../types/OfferData.type';
 import { getWidthRatingProperty } from '../../utils/util';
+import { Helmet } from 'react-helmet-async';
 
 type OfferScreenProps = {
   offerCardDataList: OfferDataType[];
@@ -38,6 +39,7 @@ function OfferScreen({ offerCardDataList, commentDataList }: OfferScreenProps): 
 
     return (
       <main className="page__main page__main--offer">
+        <Helmet title="Offers"></Helmet>
         <section className="offer">
           <Gallery images={images} />
           <div className="offer__container container">
