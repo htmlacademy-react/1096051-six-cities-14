@@ -88,6 +88,4 @@ const AuthorizationStatus = {
   Unknown: 'Unknown',
 } as const;
 
-const HAS_ACCESS: boolean = true;
-
-export { COUNT_OFFERS_RENT, CityNamesList, SortNames, Section, StarsRate, COUNT_COMMENTS, MAX_RATING, PagePaths, HAS_ACCESS, AuthorizationStatus };
+export { COUNT_OFFERS_RENT, CityNamesList, SortNames, Section, StarsRate, COUNT_COMMENTS, MAX_RATING, PagePaths, AuthorizationStatus };

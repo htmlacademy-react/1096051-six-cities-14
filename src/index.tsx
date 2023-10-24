@@ -1,7 +1,7 @@
 import React from 'react';
 import ReactDOM from 'react-dom/client';
 import App from './components/app/app';
-import { COUNT_OFFERS_RENT, CityNamesList, HAS_ACCESS, SortNames } from './const';
+import { COUNT_OFFERS_RENT, CityNamesList, SortNames } from './const';
 import { createOfferDataList } from './mock/offer';
 import { getRandomPositiveInteger } from './utils/util';
 import { nanoid } from 'nanoid';
@@ -73,7 +73,6 @@ root.render(
       favoriteCardList={getSortedFavoriteCardList()}
       commentDataList={getCommentDataList()}
       user={getUserData()}
-      hasAccess={HAS_ACCESS}
     />
   </React.StrictMode>
 );
