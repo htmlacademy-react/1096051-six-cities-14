@@ -80,8 +80,14 @@ const PagePaths = {
   FAVORITES: '/favorites',
   LOGIN: '/login',
   OFFER: '/offer',
-};
+} as const;
+
+const AuthorizationStatus = {
+  Auth: 'Auth',
+  NoAuth: 'NoAuth',
+  Unknown: 'Unknown',
+} as const;
 
 const HAS_ACCESS: boolean = true;
 
-export { COUNT_OFFERS_RENT, CityNamesList, SortNames, Section, StarsRate, COUNT_COMMENTS, MAX_RATING, PagePaths, HAS_ACCESS };
+export { COUNT_OFFERS_RENT, CityNamesList, SortNames, Section, StarsRate, COUNT_COMMENTS, MAX_RATING, PagePaths, HAS_ACCESS, AuthorizationStatus };

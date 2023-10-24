@@ -1,14 +1,15 @@
 import { Navigate } from 'react-router-dom';
+import { AuthorizationStatus } from '../../const';
 
 type PrivateRouterProps = {
-  hasAccess: boolean;
+  status: string;
   children: JSX.Element;
   deniedPath: string;
 }
 
-function PrivateRouter({hasAccess, children, deniedPath}: PrivateRouterProps): JSX.Element {
+function PrivateRouter({status, children, deniedPath}: PrivateRouterProps): JSX.Element {
   return (
-    hasAccess ? children : <Navigate to={deniedPath}/>
+    status === AuthorizationStatus.Auth ? children : <Navigate to={deniedPath}/>
   );
 }
 

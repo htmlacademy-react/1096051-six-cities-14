@@ -11,7 +11,7 @@ import { BrowserRouter, Routes, Route } from 'react-router-dom';
 import { PrivateRouter } from '../private-route/private-route';
 import { CommentDataType } from '../../types/CommentData.type';
 import { OfferDataType } from '../../types/OfferData.type';
-import { PagePaths } from '../../const';
+import { AuthorizationStatus, PagePaths } from '../../const';
 import { HelmetProvider } from 'react-helmet-async';
 
 type AppProps = {
@@ -23,7 +23,6 @@ type AppProps = {
   favoriteCardList: FavoriteCardListType;
   commentDataList: CommentDataType[];
   user: UserType;
-  hasAccess: boolean;
 }
 
 function App({
@@ -34,8 +33,7 @@ function App({
   sortNames,
   favoriteCardList,
   commentDataList,
-  user,
-  hasAccess }: AppProps): JSX.Element {
+  user }: AppProps): JSX.Element {
   return (
     <HelmetProvider>
       <BrowserRouter>
@@ -52,7 +50,7 @@ function App({
             }
             />
             <Route path={PagePaths.FAVORITES} element={
-              <PrivateRouter hasAccess={hasAccess} deniedPath={PagePaths.LOGIN}>
+              <PrivateRouter status={AuthorizationStatus.Auth} deniedPath={PagePaths.LOGIN}>
                 <FavortitesScreen
                   favoriteCardList={favoriteCardList}
                 />
@@ -67,7 +65,7 @@ function App({
             }
             />
             <Route path={PagePaths.LOGIN} element={
-              <PrivateRouter hasAccess={!hasAccess} deniedPath={PagePaths.MAIN}>
+              <PrivateRouter status={AuthorizationStatus.NoAuth} deniedPath={PagePaths.MAIN}>
                 <LoginScreen />
               </PrivateRouter>
             }
