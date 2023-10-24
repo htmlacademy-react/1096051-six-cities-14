@@ -1,0 +1,23 @@
+.link {
+  display: block;
+  width: max-content;
+  margin: 0 auto;
+  font-size: 30px;
+  text-align: center;
+  text-decoration: underline;
+  color: rgba(27, 196, 248, 1);
+
+  transition: color 0.3s ease, transform 0.3s ease;
+}
+
+.link:hover {
+  color: rgba(27, 196, 248, 0.5)
+}
+
+.link:active {
+  transform: scale(0.9);
+}
+
+.title {
+  text-align: center
+}
