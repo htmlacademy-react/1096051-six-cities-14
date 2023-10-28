@@ -3,6 +3,7 @@ import { PagePaths, Section } from '../../const';
 import { CardData } from '../../types/CardData.type';
 import { getWidthRatingProperty } from '../../utils/util';
 import Bookmark from '../bookmark/bookmark';
+import { useState } from 'react';
 
 type CitiesCardProps = {
   section: string;
@@ -10,7 +11,6 @@ type CitiesCardProps = {
 };
 
 function CityCard({ data, section = Section.DEFAULT }: CitiesCardProps): JSX.Element {
-
   const {
     isPremium,
     isFavorite,
@@ -34,8 +34,10 @@ function CityCard({ data, section = Section.DEFAULT }: CitiesCardProps): JSX.Ele
       containerClassName = 'cities';
   }
 
+  const [isActive, setIsActive] = useState(false);
+
   return (
-    <article className={`${containerClassName}__card place-card`}>
+    <article onMouseEnter={() => setIsActive(true)} onMouseOut={() => setIsActive(false)} className={`${containerClassName}__card place-card`}>
       {isPremium ?
         <div className="place-card__mark">
           <span>Premium</span>
