@@ -34,7 +34,7 @@ function CityCard({ data, section = Section.DEFAULT }: CitiesCardProps): JSX.Ele
       containerClassName = 'cities';
   }
 
-  const [isActive, setIsActive] = useState(false);
+  const [, setIsActive] = useState(false);
 
   return (
     <article onMouseEnter={() => setIsActive(true)} onMouseOut={() => setIsActive(false)} className={`${containerClassName}__card place-card`}>
