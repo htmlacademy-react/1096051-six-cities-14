@@ -22,6 +22,7 @@ function SixCitiesScreen({
   offerCardDataList,
   currentSort,
   sortNames }: SixCitiesScreenProps): JSX.Element {
+
   return (
     <main className="page__main page__main--index">
       <Helmet title="6 Cities"></Helmet>

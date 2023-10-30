@@ -21,6 +21,7 @@ type OfferScreenProps = {
 function OfferScreen({ offerCardDataList, commentDataList }: OfferScreenProps): JSX.Element {
   const paramID = useParams().id;
   const offerData = offerCardDataList.find(({ id }) => id === paramID);
+
   if (offerData) {
     const {
       host,

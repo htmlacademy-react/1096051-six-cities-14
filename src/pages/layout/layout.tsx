@@ -3,9 +3,11 @@ import Header from '../../components/header/header';
 import { UserType } from '../../types/User.type';
 import { PagePaths } from '../../const';
 import Footer from '../../components/footer/footer';
+import { useState } from 'react';
 
 type LayoutProps = {
   user: UserType;
+  authStatus: string;
 }
 
 function getPageClassName(currentPage: string): string | undefined {
@@ -19,14 +21,18 @@ function getPageClassName(currentPage: string): string | undefined {
   }
 }
 
-function Layout({user}: LayoutProps): JSX.Element {
-  const currentPage = window.location.pathname;
+function Layout({ user, authStatus }: LayoutProps): JSX.Element {
+  const [pagePath, setPagePath] = useState(PagePaths.MAIN);
+
+  function handlePagePath(path: string): void {
+    setPagePath(path);
+  }
 
   return (
-    <div className={`page ${getPageClassName(currentPage)}`}>
-      <Header user={user} />
+    <div className={`page ${getPageClassName(pagePath)}`}>
+      <Header user={user} handlePagePath={handlePagePath} authStatus={authStatus}/>
       <Outlet />
-      { currentPage === PagePaths.FAVORITES && <Footer />}
+      {pagePath !== PagePaths.MAIN && <Footer handlePagePath={handlePagePath} />}
     </div>
   );
 }

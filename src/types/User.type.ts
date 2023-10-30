@@ -6,3 +6,10 @@ export type UserType = {
   name: string;
   token: string;
 }
+
+export type UserComment = {
+  avatarUrl: string;
+  id: number;
+  isPro: boolean;
+  name: string;
+}

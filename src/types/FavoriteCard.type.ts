@@ -1,15 +1,8 @@
+import { CardData } from './CardData.type';
+
 export type FavoriteItemDataType = {
   cityName: string;
-  dataList: {
-    isFavorite: boolean;
-    isPremium: boolean;
-    previewImage: string;
-    price: number;
-    rating: number;
-    title: string;
-    type: string;
-    id: string;
-  }[];
+  dataList: CardData[];
 }
 
 export type FavoriteCardListType = (FavoriteItemDataType & {
