@@ -6,6 +6,7 @@ import Sort from '../../components/sort/sort';
 import { Section } from '../../const';
 import { OfferDataType } from '../../types/OfferData.type';
 import { UniversalType } from '../../types/UniversalType.type';
+import { useOutletContext } from 'react-router-dom';
 
 type SixCitiesScreenProps = {
   countOffersRent: number;
@@ -22,6 +23,10 @@ function SixCitiesScreen({
   offerCardDataList,
   currentSort,
   sortNames }: SixCitiesScreenProps): JSX.Element {
+
+  const setPagePath: (str: string)=> unknown = useOutletContext();
+  setPagePath(window.location.pathname);
+
   return (
     <main className="page__main page__main--index">
       <Helmet title="6 Cities"></Helmet>

@@ -1,6 +1,9 @@
 import { Helmet } from 'react-helmet-async';
+import { Link, useOutletContext } from 'react-router-dom';
 
 function LoginScreen(): JSX.Element {
+  const setPagePath: (str: string)=> unknown = useOutletContext();
+  setPagePath(window.location.pathname);
   return (
     <main className="page__main page__main--login">
       <Helmet title="Login"></Helmet>
@@ -21,9 +24,9 @@ function LoginScreen(): JSX.Element {
         </section>
         <section className="locations locations--login locations--current">
           <div className="locations__item">
-            <a className="locations__item-link" href="#">
+            <Link className="locations__item-link" to="#">
               <span>Amsterdam</span>
-            </a>
+            </Link>
           </div>
         </section>
       </div>

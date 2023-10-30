@@ -50,7 +50,7 @@ function App({
             }
             />
             <Route path={PagePaths.FAVORITES} element={
-              <PrivateRouter status={AuthorizationStatus.Auth} deniedPath={PagePaths.LOGIN}>
+              <PrivateRouter status={AuthorizationStatus.NoAuth} deniedPath={PagePaths.LOGIN}>
                 <FavortitesScreen
                   favoriteCardList={favoriteCardList}
                 />
@@ -65,7 +65,7 @@ function App({
             }
             />
             <Route path={PagePaths.LOGIN} element={
-              <PrivateRouter status={AuthorizationStatus.NoAuth} deniedPath={PagePaths.MAIN}>
+              <PrivateRouter status={AuthorizationStatus.Auth} deniedPath={PagePaths.MAIN}>
                 <LoginScreen />
               </PrivateRouter>
             }

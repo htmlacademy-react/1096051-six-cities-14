@@ -1,3 +1,4 @@
+import { Link } from 'react-router-dom';
 import { UniversalType } from '../../types/UniversalType.type';
 
 type LocationItemProps = UniversalType
@@ -5,9 +6,9 @@ type LocationItemProps = UniversalType
 function LocationItem({name, id}: LocationItemProps): JSX.Element {
   return (
     <li className="locations__item">
-      <a className="locations__item-link tabs__item" id={id} href="#">
+      <Link className="locations__item-link tabs__item" id={id} to="#">
         <span>{name}</span>
-      </a>
+      </Link>
     </li>
   );
 }
