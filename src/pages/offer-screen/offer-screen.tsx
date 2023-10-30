@@ -1,4 +1,4 @@
-import { Navigate, useOutletContext, useParams } from 'react-router-dom';
+import { Navigate, useParams } from 'react-router-dom';
 import Bookmark from '../../components/bookmark/bookmark';
 import CityCard from '../../components/city-card/city-card';
 import Features from '../../components/features/features';
@@ -21,8 +21,7 @@ type OfferScreenProps = {
 function OfferScreen({ offerCardDataList, commentDataList }: OfferScreenProps): JSX.Element {
   const paramID = useParams().id;
   const offerData = offerCardDataList.find(({ id }) => id === paramID);
-  const setPagePath: (str: string)=> unknown = useOutletContext();
-  setPagePath(window.location.pathname);
+
   if (offerData) {
     const {
       host,

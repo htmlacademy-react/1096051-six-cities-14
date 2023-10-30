@@ -1,15 +1,19 @@
 import { Navigate } from 'react-router-dom';
-import { AuthorizationStatus } from '../../const';
+import { AuthorizationStatus, PagePaths } from '../../const';
 
 type PrivateRouterProps = {
-  status: string;
+  authStatus: string;
   children: JSX.Element;
   deniedPath: string;
 }
 
-function PrivateRouter({status, children, deniedPath}: PrivateRouterProps): JSX.Element {
+function PrivateRouter({ authStatus, children, deniedPath }: PrivateRouterProps): JSX.Element {
+  const currentPagePath = window.location.pathname;
+  const isAuth = authStatus === AuthorizationStatus.Auth;
+  const isAccess = currentPagePath === PagePaths.LOGIN ? !isAuth : isAuth;
+
   return (
-    status === AuthorizationStatus.Auth ? children : <Navigate to={deniedPath}/>
+    isAccess ? children : <Navigate to={deniedPath} />
   );
 }
 

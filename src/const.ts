@@ -80,7 +80,7 @@ const PagePaths = {
   FAVORITES: '/favorites',
   LOGIN: '/login',
   OFFER: '/offer',
-} as const;
+};
 
 const AuthorizationStatus = {
   Auth: 'Auth',

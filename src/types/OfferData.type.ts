@@ -1,3 +1,5 @@
+import { CardData } from './CardData.type';
+
 export type HostType = {
   avatarUrl: string;
   id: number;
@@ -16,21 +18,14 @@ type City = {
   name: string;
 }
 
-export type OfferDataType = {
-  bedrooms: number;
+export type OfferDataType = CardData & {
   city: City;
+  host: HostType;
+  location: Location;
+  bedrooms: number;
   description: string;
   goods: string[];
-  host: HostType;
   images: string[];
-  isFavorite: boolean;
-  isPremium: boolean;
-  location: Location;
   maxAdults: number;
-  previewImage: string;
-  price: number;
-  rating: number;
-  title: string;
-  type: string;
-  id: string;
 };
+

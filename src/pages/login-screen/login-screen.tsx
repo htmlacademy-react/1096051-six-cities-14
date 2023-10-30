@@ -1,9 +1,7 @@
 import { Helmet } from 'react-helmet-async';
-import { Link, useOutletContext } from 'react-router-dom';
+import { Link } from 'react-router-dom';
 
 function LoginScreen(): JSX.Element {
-  const setPagePath: (str: string)=> unknown = useOutletContext();
-  setPagePath(window.location.pathname);
   return (
     <main className="page__main page__main--login">
       <Helmet title="Login"></Helmet>

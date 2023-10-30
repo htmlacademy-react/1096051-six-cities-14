@@ -2,7 +2,6 @@ import { Helmet } from 'react-helmet-async';
 import CityCard from '../../components/city-card/city-card';
 import { Section } from '../../const';
 import { FavoriteCardListType, FavoriteItemDataType } from '../../types/FavoriteCard.type';
-import { useOutletContext } from 'react-router-dom';
 
 function FavoriteItem({ cityName, dataList }: FavoriteItemDataType): JSX.Element {
   return (
@@ -26,9 +25,6 @@ type FavortitesScreenProps = {
 };
 
 function FavortitesScreen({ favoriteCardList }: FavortitesScreenProps): JSX.Element {
-  const setPagePath: (str: string)=> unknown = useOutletContext();
-  setPagePath(window.location.pathname);
-
   return (
     <main className="page__main page__main--favorites">
       <Helmet title="Favorites"></Helmet>
