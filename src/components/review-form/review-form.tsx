@@ -24,13 +24,11 @@ function ReviewStar({ number, title, handleRatingChange }: StarProps): JSX.Eleme
 }
 
 function ReviewForm() {
-  const [review, setReview] = useState({
-    rating: 0,
-    comment: '',
-  });
+  const [rating, setRating] = useState(0);
+  const [comment, setComment] = useState('');
 
   function handleRatingChange(number: number): void {
-    setReview({ ...review, rating: number });
+    setRating(number);
   }
 
   return (
@@ -39,17 +37,18 @@ function ReviewForm() {
       action="#"
       method="post"
     >
-      <label className="reviews__label form__label" htmlFor="review">Your review</label>
+      {/* to do Удалить заглушку (rating: {rating})*/}
+      <label className="reviews__label form__label" htmlFor="review">Your review (rating: {rating})</label>
       <div className="reviews__rating-form form__rating">
         {StarsRate.map(({ number, title, id }) => <ReviewStar number={number} title={title} key={id} handleRatingChange={handleRatingChange} />)}
       </div>
       <textarea
-        onChange={({ target }) => setReview({ ...review, comment: target.value })}
+        onChange={({ target }) => setComment(target.value)}
         className="reviews__textarea form__textarea"
         id="review"
         name="review"
         placeholder="Tell how was your stay, what you like and what can be improved"
-        value={review.comment}
+        value={comment}
       >
       </textarea>
       <div className="reviews__button-wrapper">
