@@ -1,11 +1,11 @@
 import { Helmet } from 'react-helmet-async';
-import CityCard from '../../components/city-card/city-card';
 import LocationsList from '../../components/locations/locations';
 import Map from '../../components/map/map';
 import Sort from '../../components/sort/sort';
 import { Section } from '../../const';
 import { OfferDataType } from '../../types/OfferData.type';
 import { UniversalType } from '../../types/UniversalType.type';
+import CityList from '../../components/city-list/city-list';
 
 type SixCitiesScreenProps = {
   countOffersRent: number;
@@ -39,7 +39,7 @@ function SixCitiesScreen({
             <b className="places__found">{countOffersRent} places to stay in Amsterdam</b>
             <Sort currentSort={currentSort} sortNames={sortNames} />
             <div className="cities__places-list places__list tabs__content">
-              {offerCardDataList.map((data) => <CityCard data={data} key={data.id} section={Section.DEFAULT} />)}
+              <CityList dataList={offerCardDataList} section={Section.DEFAULT}></CityList>
             </div>
           </section>
           <div className="cities__right-section">
