@@ -1,6 +1,5 @@
 import { Navigate, useParams } from 'react-router-dom';
 import Bookmark from '../../components/bookmark/bookmark';
-import CityCard from '../../components/city-card/city-card';
 import Features from '../../components/features/features';
 import Gallery from '../../components/gallery/gallery';
 import Host from '../../components/host/host';
@@ -12,6 +11,7 @@ import { CommentDataType } from '../../types/CommentData.type';
 import { OfferDataType } from '../../types/OfferData.type';
 import { getWidthRatingProperty } from '../../utils/util';
 import { Helmet } from 'react-helmet-async';
+import CityList from '../../components/city-list/city-list';
 
 type OfferScreenProps = {
   offerCardDataList: OfferDataType[];
@@ -78,7 +78,7 @@ function OfferScreen({ offerCardDataList, commentDataList }: OfferScreenProps): 
           <section className="near-places places">
             <h2 className="near-places__title">Other places in the neighbourhood</h2>
             <div className="near-places__list places__list">
-              {offerCardDataList.map((data) => <CityCard data={data} key={data.id} section={Section.OTHER} />)}
+              <CityList dataList={offerCardDataList} section={Section.OTHER}></CityList>
             </div>
           </section>
         </div>

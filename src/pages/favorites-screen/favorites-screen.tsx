@@ -1,7 +1,7 @@
 import { Helmet } from 'react-helmet-async';
-import CityCard from '../../components/city-card/city-card';
 import { Section } from '../../const';
 import { FavoriteCardListType, FavoriteItemDataType } from '../../types/FavoriteCard.type';
+import CityList from '../../components/city-list/city-list';
 
 function FavoriteItem({ cityName, dataList }: FavoriteItemDataType): JSX.Element {
   return (
@@ -14,7 +14,7 @@ function FavoriteItem({ cityName, dataList }: FavoriteItemDataType): JSX.Element
         </div>
       </div>
       <div className="favorites__places">
-        {dataList.map((cardData) => <CityCard data={cardData} key={cardData.id} section={Section.FAVORITE} />)}
+        <CityList dataList={dataList} section={Section.FAVORITE}></CityList>
       </div>
     </li>
   );

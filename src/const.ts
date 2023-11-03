@@ -73,7 +73,7 @@ const Section = {
   FAVORITE: 'FAVORITE',
   OTHER: 'OTHER',
   OFFER: 'OFFER'
-} as const;
+};
 
 const PagePaths = {
   MAIN: '/',
