@@ -1,7 +1,6 @@
 import { nanoid } from 'nanoid';
 import { UniversalType } from './types/UniversalType.type';
 
-const COUNT_OFFERS_RENT: number = 6;
 const COUNT_COMMENTS: number = 5;
 const MAX_RATING = 5;
 
@@ -88,4 +87,9 @@ const AuthorizationStatus = {
   Unknown: 'Unknown',
 } as const;
 
-export { COUNT_OFFERS_RENT, CityNamesList, SortNames, Section, StarsRate, COUNT_COMMENTS, MAX_RATING, PagePaths, AuthorizationStatus };
+const UrlMarker = {
+  Default: 'https://assets.htmlacademy.ru/content/intensive/javascript-1/demo/interactive-map/pin.svg',
+  Current: 'https://assets.htmlacademy.ru/content/intensive/javascript-1/demo/interactive-map/main-pin.svg'
+};
+
+export { UrlMarker, CityNamesList, SortNames, Section, StarsRate, COUNT_COMMENTS, MAX_RATING, PagePaths, AuthorizationStatus };

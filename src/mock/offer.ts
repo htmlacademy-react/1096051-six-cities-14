@@ -7,21 +7,6 @@ const Bedrooms = {
   MAX: 4
 } as const;
 
-const Location = {
-  Latitude: {
-    MIN: 0,
-    MAX: 100
-  },
-  Longitude: {
-    MIN: 0,
-    MAX: 100
-  },
-  Zoom: {
-    MIN: 1,
-    MAX: 10
-  }
-} as const;
-
 const Price = {
   MIN: 10,
   MAX: 1000
@@ -39,14 +24,32 @@ const OfferType: string[] = [
   'hotel'
 ];
 
-function createOfferData() {
+const Location = [
+  {
+    latitude: 52.3909553943508,
+    longitude: 4.85309666406198
+  },
+  {
+    latitude: 52.3609553943508,
+    longitude: 4.85309666406198
+  },
+  {
+    latitude: 52.3909553943508,
+    longitude: 4.929309666406198
+  },
+  {
+    latitude: 52.3809553943508,
+    longitude: 4.939309666406198
+  },
+] as const;
+
+function createOfferData(index: number) {
   return {
     bedrooms: getRandomPositiveInteger(Bedrooms.MIN, Bedrooms.MAX),
     city: {
       location: {
-        latitude: getRandomPositiveInteger(Location.Latitude.MIN, Location.Latitude.MAX),
-        longitude: getRandomPositiveInteger(Location.Longitude.MIN, Location.Longitude.MAX),
-        zoom: getRandomPositiveInteger(Location.Zoom.MIN, Location.Zoom.MAX)
+        ...Location[index],
+        zoom: 10
       },
       name: CityNamesList[getRandomPositiveInteger(0, CityNamesList.length - 1)].name
     },
@@ -82,8 +85,8 @@ function createOfferData() {
   };
 }
 
-function createOfferDataList(count: number) {
-  return Array.from({length: count}, createOfferData);
+function createOfferDataList() {
+  return Array.from({length: Location.length}, (_, index) => createOfferData(index));
 }
 
 export { createOfferDataList };

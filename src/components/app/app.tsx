@@ -10,12 +10,12 @@ import { UserType } from '../../types/User.type';
 import { BrowserRouter, Routes, Route } from 'react-router-dom';
 import { PrivateRouter } from '../private-route/private-route';
 import { CommentDataType } from '../../types/CommentData.type';
-import { OfferDataType } from '../../types/OfferData.type';
+import { City, OfferDataType } from '../../types/OfferData.type';
 import { PagePaths } from '../../const';
 import { HelmetProvider } from 'react-helmet-async';
+import { useState } from 'react';
 
 type AppProps = {
-  countOffersRent: number;
   cityNames: UniversalType[];
   offerCardDataList: OfferDataType[];
   currentSort: UniversalType;
@@ -24,10 +24,11 @@ type AppProps = {
   commentDataList: CommentDataType[];
   user: UserType;
   authStatus: string;
+  city: City;
 }
 
 function App({
-  countOffersRent,
+  city,
   cityNames,
   offerCardDataList,
   currentSort,
@@ -36,6 +37,17 @@ function App({
   commentDataList,
   user,
   authStatus }: AppProps): JSX.Element {
+
+  const [selectedPoint, setSelectedPoint] = useState<OfferDataType | undefined>(
+    undefined
+  );
+
+  const handleListItemHover = (listItemName: string) => {
+    const currentPoint = offerCardDataList.find(({ title }) => title === listItemName);
+
+    setSelectedPoint(currentPoint);
+  };
+
   return (
     <HelmetProvider>
       <BrowserRouter>
@@ -43,7 +55,9 @@ function App({
           <Route path={PagePaths.MAIN} element={<Layout user={user} authStatus={authStatus} />}>
             <Route index element={
               <SixCitiesScreen
-                countOffersRent={countOffersRent}
+                onListItemHover={handleListItemHover}
+                selectedPoint={selectedPoint}
+                city={city}
                 cityNames={cityNames}
                 offerCardDataList={offerCardDataList}
                 currentSort={currentSort}
