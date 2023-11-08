@@ -1,8 +1,8 @@
-import { OfferDataType } from '../../types/OfferData.type';
+import { CardData } from '../../types/CardData.type';
 import CityCard from '../city-card/city-card';
 
 type CityListProps = {
-  dataList: OfferDataType[];
+  dataList: CardData[];
   section: string;
   onListItemHover: (listItemName: string) => void;
 }

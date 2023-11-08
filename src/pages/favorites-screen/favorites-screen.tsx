@@ -3,7 +3,15 @@ import { Section } from '../../const';
 import { FavoriteCardListType, FavoriteItemDataType } from '../../types/FavoriteCard.type';
 import CityList from '../../components/city-list/city-list';
 
-function FavoriteItem({ cityName, dataList }: FavoriteItemDataType): JSX.Element {
+type FavoriteItemProps = FavoriteItemDataType &{
+  handleListItemHover: (listItemName: string) => void;
+}
+
+function FavoriteItem({
+  cityName,
+  dataList,
+  handleListItemHover,
+}: FavoriteItemProps): JSX.Element {
   return (
     <li className="favorites__locations-items">
       <div className="favorites__locations locations locations--current">
@@ -14,7 +22,7 @@ function FavoriteItem({ cityName, dataList }: FavoriteItemDataType): JSX.Element
         </div>
       </div>
       <div className="favorites__places">
-        <CityList dataList={dataList} section={Section.FAVORITE}></CityList>
+        <CityList onListItemHover={handleListItemHover} dataList={dataList} section={Section.FAVORITE}></CityList>
       </div>
     </li>
   );
@@ -22,9 +30,13 @@ function FavoriteItem({ cityName, dataList }: FavoriteItemDataType): JSX.Element
 
 type FavortitesScreenProps = {
   favoriteCardList: FavoriteCardListType;
+  handleListItemHover: (listItemName: string) => void;
 };
 
-function FavortitesScreen({ favoriteCardList }: FavortitesScreenProps): JSX.Element {
+function FavortitesScreen({
+  favoriteCardList,
+  handleListItemHover
+}: FavortitesScreenProps): JSX.Element {
   return (
     <main className="page__main page__main--favorites">
       <Helmet title="Favorites"></Helmet>
@@ -32,7 +44,7 @@ function FavortitesScreen({ favoriteCardList }: FavortitesScreenProps): JSX.Elem
         <section className="favorites">
           <h1 className="favorites__title">Saved listing</h1>
           <ul className="favorites__list">
-            {favoriteCardList.map(({ cityName, dataList, id }) => <FavoriteItem cityName={cityName} dataList={dataList} key={id} />)}
+            {favoriteCardList.map(({ cityName, dataList, id }) => <FavoriteItem handleListItemHover={handleListItemHover} cityName={cityName} dataList={dataList} key={id} />)}
           </ul>
         </section>
       </div>

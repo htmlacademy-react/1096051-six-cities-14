@@ -68,6 +68,7 @@ function App({
             <Route path={PagePaths.FAVORITES} element={
               <PrivateRouter authStatus={authStatus} deniedPath={PagePaths.LOGIN}>
                 <FavortitesScreen
+                  handleListItemHover={handleListItemHover}
                   favoriteCardList={favoriteCardList}
                 />
               </PrivateRouter>
@@ -75,8 +76,11 @@ function App({
             />
             <Route path={`${PagePaths.OFFER}/:id`} element={
               <OfferScreen
+                handleListItemHover={handleListItemHover}
                 offerCardDataList={offerCardDataList}
                 commentDataList={commentDataList}
+                city={city}
+                selectedPoint={selectedPoint}
               />
             }
             />

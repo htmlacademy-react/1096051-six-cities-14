@@ -8,17 +8,33 @@ import OfferGoods from '../../components/offer-goods/offer-goods';
 import Review from '../../components/review/review';
 import { PagePaths, Section } from '../../const';
 import { CommentDataType } from '../../types/CommentData.type';
-import { OfferDataType } from '../../types/OfferData.type';
+import { City, OfferDataType } from '../../types/OfferData.type';
 import { getWidthRatingProperty } from '../../utils/util';
 import { Helmet } from 'react-helmet-async';
 import CityList from '../../components/city-list/city-list';
+import { useEffect } from 'react';
 
 type OfferScreenProps = {
   offerCardDataList: OfferDataType[];
   commentDataList: CommentDataType[];
+  handleListItemHover: (listItemName: string) => void;
+  city: City;
+  selectedPoint: OfferDataType | undefined;
 }
 
-function OfferScreen({ offerCardDataList, commentDataList }: OfferScreenProps): JSX.Element {
+function OfferScreen({
+  offerCardDataList,
+  commentDataList,
+  handleListItemHover,
+  city,
+  selectedPoint
+}: OfferScreenProps): JSX.Element {
+  const currentLocation = window.location.href;
+
+  useEffect(() => {
+    window.scrollTo(0, 0);
+  }, [currentLocation]);
+
   const paramID = useParams().id;
   const offerData = offerCardDataList.find(({ id }) => id === paramID);
 
@@ -72,13 +88,13 @@ function OfferScreen({ offerCardDataList, commentDataList }: OfferScreenProps): 
               <Review commentDataList={commentDataList} />
             </div>
           </div>
-          <Map section={Section.OTHER} />
+          <Map city={city} selectedPoint={selectedPoint} offerCardDataList={offerCardDataList} section={Section.OTHER} />
         </section>
         <div className="container">
           <section className="near-places places">
             <h2 className="near-places__title">Other places in the neighbourhood</h2>
             <div className="near-places__list places__list">
-              <CityList dataList={offerCardDataList} section={Section.OTHER}></CityList>
+              <CityList onListItemHover={handleListItemHover} dataList={offerCardDataList} section={Section.OTHER}></CityList>
             </div>
           </section>
         </div>
