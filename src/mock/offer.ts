@@ -42,7 +42,7 @@ const Location = [
     longitude: 4.939309666406198
   },
 ];
-
+// to do (Сделал второй модуль до этого)
 function createOfferData(index: number) {
   return {
     bedrooms: getRandomPositiveInteger(Bedrooms.MIN, Bedrooms.MAX),
