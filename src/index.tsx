@@ -1,17 +1,17 @@
 import React from 'react';
 import ReactDOM from 'react-dom/client';
 import App from './components/app/app';
-import { AuthorizationStatus, COUNT_OFFERS_RENT, CityNamesList, SortNames } from './const';
+import { AuthorizationStatus, CityNamesList, SortNames } from './const';
 import { createOfferDataList } from './mock/offer';
 import { getRandomPositiveInteger } from './utils/util';
 import { nanoid } from 'nanoid';
 import { getCommentDataList } from './mock/comment';
 import { getUserData } from './mock/user';
 import { FavoriteCardListType } from './types/FavoriteCard.type';
+import { CITY } from './mock/city';
 
-const OFFERS_COUNT: number = 6;
 const currentSort = SortNames[getRandomPositiveInteger(0, SortNames.length - 1)];
-const offersDataList = createOfferDataList(OFFERS_COUNT);
+const offersDataList = createOfferDataList();
 
 const offerCardDataList = offersDataList.map((offerData) => {
   const {
@@ -26,7 +26,7 @@ const offerCardDataList = offersDataList.map((offerData) => {
     id
   } = offerData;
   const cardOfferData = {
-    cityName: city.name,
+    city,
     isFavorite,
     isPremium,
     previewImage,
@@ -43,10 +43,10 @@ const offerCardDataList = offersDataList.map((offerData) => {
 function getSortedFavoriteCardList() {
   const favoriteCardList = offerCardDataList
     .filter(({ isFavorite }) => isFavorite);
-  const cityNamesList = favoriteCardList.map(({ cityName }) => cityName);
+  const cityNamesList = favoriteCardList.map(({ city }) => city.name);
 
   const sortedFavoriteCardList: FavoriteCardListType = cityNamesList.map((name) => {
-    const dataList = favoriteCardList.filter(({ cityName }) => cityName === name).map(({ ...data }) => data);
+    const dataList = favoriteCardList.filter(({ city }) => city.name === name).map(({ ...data }) => data);
 
     return {
       id: nanoid(),
@@ -65,7 +65,7 @@ const root = ReactDOM.createRoot(
 root.render(
   <React.StrictMode>
     <App
-      countOffersRent={COUNT_OFFERS_RENT}
+      city={CITY}
       cityNames={CityNamesList}
       offerCardDataList={offersDataList}
       currentSort={currentSort}
