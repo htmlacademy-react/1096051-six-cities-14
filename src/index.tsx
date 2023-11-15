@@ -1,7 +1,7 @@
 import React from 'react';
 import ReactDOM from 'react-dom/client';
 import App from './components/app/app';
-import { AuthorizationStatus, CityNamesList, SortNames } from './const';
+import { AuthorizationStatus, SortNames } from './const';
 import { createOfferDataList } from './mock/offer';
 import { getRandomPositiveInteger } from './utils/util';
 import { nanoid } from 'nanoid';
@@ -9,6 +9,8 @@ import { getCommentDataList } from './mock/comment';
 import { getUserData } from './mock/user';
 import { FavoriteCardListType } from './types/FavoriteCard.type';
 import { CITY } from './mock/city';
+import { Provider } from 'react-redux';
+import { store } from './store';
 
 const currentSort = SortNames[getRandomPositiveInteger(0, SortNames.length - 1)];
 const offersDataList = createOfferDataList();
@@ -64,16 +66,16 @@ const root = ReactDOM.createRoot(
 
 root.render(
   <React.StrictMode>
-    <App
-      city={CITY}
-      cityNames={CityNamesList}
-      offerCardDataList={offersDataList}
-      currentSort={currentSort}
-      sortNames={SortNames}
-      favoriteCardList={getSortedFavoriteCardList()}
-      commentDataList={getCommentDataList()}
-      user={getUserData()}
-      authStatus={AuthorizationStatus.Auth}
-    />
+    <Provider store={store}>
+      <App
+        city={CITY}
+        currentSort={currentSort}
+        sortNames={SortNames}
+        favoriteCardList={getSortedFavoriteCardList()}
+        commentDataList={getCommentDataList()}
+        user={getUserData()}
+        authStatus={AuthorizationStatus.Auth}
+      />
+    </Provider>
   </React.StrictMode>
 );

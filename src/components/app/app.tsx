@@ -14,10 +14,9 @@ import { City, OfferDataType } from '../../types/OfferData.type';
 import { PagePaths } from '../../const';
 import { HelmetProvider } from 'react-helmet-async';
 import { useState } from 'react';
+import { useAppSelector } from '../../hooks';
 
 type AppProps = {
-  cityNames: UniversalType[];
-  offerCardDataList: OfferDataType[];
   currentSort: UniversalType;
   sortNames: UniversalType[];
   favoriteCardList: FavoriteCardListType;
@@ -29,8 +28,6 @@ type AppProps = {
 
 function App({
   city,
-  cityNames,
-  offerCardDataList,
   currentSort,
   sortNames,
   favoriteCardList,
@@ -42,8 +39,9 @@ function App({
     undefined
   );
 
+  const offerCardList = useAppSelector((state) => state.rentList);
   const handleListItemHover = (listItemName: string) => {
-    const currentPoint = offerCardDataList.find(({ title }) => title === listItemName);
+    const currentPoint = offerCardList.find(({ title }) => title === listItemName);
 
     setSelectedPoint(currentPoint);
   };
@@ -58,8 +56,6 @@ function App({
                 onListItemHover={handleListItemHover}
                 selectedPoint={selectedPoint}
                 city={city}
-                cityNames={cityNames}
-                offerCardDataList={offerCardDataList}
                 currentSort={currentSort}
                 sortNames={sortNames}
               />
@@ -77,7 +73,7 @@ function App({
             <Route path={`${PagePaths.OFFER}/:id`} element={
               <OfferScreen
                 handleListItemHover={handleListItemHover}
-                offerCardDataList={offerCardDataList}
+                offerCardDataList={offerCardList}
                 commentDataList={commentDataList}
                 city={city}
                 selectedPoint={selectedPoint}
