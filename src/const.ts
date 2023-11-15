@@ -32,13 +32,31 @@ const StarsRate = [
   },
 ];
 
-const CityNames: string[] = [
-  'Paris',
-  'Cologne',
-  'Brussels',
-  'Amsterdam',
-  'Hamburg',
-  'Dusseldorf'
+const CityNames: UniversalType[] = [
+  {
+    name: 'Paris',
+    id: nanoid()
+  },
+  {
+    name: 'Cologne',
+    id: nanoid()
+  },
+  {
+    name: 'Brussels',
+    id: nanoid()
+  },
+  {
+    name: 'Amsterdam',
+    id: nanoid()
+  },
+  {
+    name: 'Hamburg',
+    id: nanoid()
+  },
+  {
+    name: 'Dusseldorf',
+    id: nanoid()
+  },
 ];
 
 type SortNamesType = UniversalType[]
@@ -61,11 +79,6 @@ const SortNames: SortNamesType = [
     id: nanoid()
   }
 ];
-
-const CityNamesList = CityNames.map((name) => ({
-  name,
-  id: nanoid()
-}));
 
 const Section = {
   DEFAULT: 'DEFAULT',
@@ -92,4 +105,4 @@ const UrlMarker = {
   Current: 'https://assets.htmlacademy.ru/content/intensive/javascript-1/demo/interactive-map/main-pin.svg'
 };
 
-export { UrlMarker, CityNamesList, SortNames, Section, StarsRate, COUNT_COMMENTS, MAX_RATING, PagePaths, AuthorizationStatus };
+export { UrlMarker, CityNames, SortNames, Section, StarsRate, COUNT_COMMENTS, MAX_RATING, PagePaths, AuthorizationStatus };

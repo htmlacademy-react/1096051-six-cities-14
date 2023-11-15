@@ -1,5 +1,5 @@
 import { nanoid } from 'nanoid';
-import { CityNamesList } from '../const';
+import { CityNames } from '../const';
 import { getRandomBoolean, getRandomPositiveInteger } from '../utils/util';
 
 const Bedrooms = {
@@ -51,7 +51,7 @@ function createOfferData(index: number) {
         ...Location[index],
         zoom: 10
       },
-      name: CityNamesList[getRandomPositiveInteger(0, CityNamesList.length - 1)].name
+      name: CityNames[getRandomPositiveInteger(0, CityNames.length - 1)].name
     },
     description: 'A quiet cozy and picturesque that hides behind a a river by the unique lightness of Amsterdam.',
     goods: [

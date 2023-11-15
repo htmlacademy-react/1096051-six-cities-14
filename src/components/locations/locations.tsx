@@ -1,24 +1,31 @@
 import { Link } from 'react-router-dom';
+import { useAppDispatch, useAppSelector } from '../../hooks';
 import { UniversalType } from '../../types/UniversalType.type';
+import { changeCity, renderRentList } from '../../store/action';
 
 type LocationItemProps = UniversalType
 
-function LocationItem({name, id}: LocationItemProps): JSX.Element {
+function LocationItem({ name, id }: LocationItemProps): JSX.Element {
+  const dispatch = useAppDispatch();
+
   return (
     <li className="locations__item">
-      <Link className="locations__item-link tabs__item" id={id} to="#">
+      <Link onClick={
+        () => {
+          dispatch(changeCity(name));
+          dispatch(renderRentList());
+        }
+      } className="locations__item-link tabs__item" id={id} to="#"
+      >
         <span>{name}</span>
       </Link>
     </li>
   );
 }
 
-type LocationsListProps = {
-  cityNames: UniversalType[];
-};
-
-function LocationsList({cityNames}: LocationsListProps): JSX.Element {
-  const locationItemsElements = cityNames.map(({name, id}) => (
+function LocationsList(): JSX.Element {
+  const cityNames = useAppSelector((state) => state.cityNames);
+  const locationItemsElements = cityNames.map(({ name, id }) => (
     <LocationItem name={name} id={id} key={id} />
   ));
 

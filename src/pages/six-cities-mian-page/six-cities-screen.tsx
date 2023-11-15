@@ -6,10 +6,9 @@ import { Section } from '../../const';
 import { City, OfferDataType } from '../../types/OfferData.type';
 import { UniversalType } from '../../types/UniversalType.type';
 import CityList from '../../components/city-list/city-list';
+import { useAppSelector } from '../../hooks';
 
 type SixCitiesScreenProps = {
-  cityNames: UniversalType[];
-  offerCardDataList: OfferDataType[];
   currentSort: UniversalType;
   sortNames: UniversalType[];
   onListItemHover: (listItemName: string) => void;
@@ -21,11 +20,11 @@ type SixCitiesScreenProps = {
 function SixCitiesScreen({
   onListItemHover,
   selectedPoint,
-  cityNames,
   city,
-  offerCardDataList,
   currentSort,
   sortNames }: SixCitiesScreenProps): JSX.Element {
+  const offerDataList = useAppSelector((state) => state.rentList);
+  const currentCityNamer = useAppSelector((state) => state.currentCityName);
 
   return (
     <main className="page__main page__main--index">
@@ -33,21 +32,21 @@ function SixCitiesScreen({
       <h1 className="visually-hidden">Cities</h1>
       <div className="tabs">
         <section className="locations container">
-          <LocationsList cityNames={cityNames} />
+          <LocationsList />
         </section>
       </div>
       <div className="cities">
         <div className="cities__places-container container">
           <section className="cities__places places">
             <h2 className="visually-hidden">Places</h2>
-            <b className="places__found">{offerCardDataList.length} places to stay in Amsterdam</b>
+            <b className="places__found">{offerDataList.length} places to stay in {currentCityNamer}</b>
             <Sort currentSort={currentSort} sortNames={sortNames} />
             <div className="cities__places-list places__list tabs__content">
-              <CityList onListItemHover={onListItemHover} dataList={offerCardDataList} section={Section.DEFAULT}></CityList>
+              <CityList onListItemHover={onListItemHover} dataList={offerDataList} section={Section.DEFAULT}></CityList>
             </div>
           </section>
           <div className="cities__right-section">
-            <Map selectedPoint={selectedPoint} city={city} offerCardDataList={offerCardDataList} section={Section.DEFAULT} />
+            <Map selectedPoint={selectedPoint} city={city} offerCardDataList={offerDataList} section={Section.DEFAULT} />
           </div>
         </div>
       </div>
