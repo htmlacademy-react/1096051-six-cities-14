@@ -1,5 +1,6 @@
 import { nanoid } from 'nanoid';
 import { UniversalType } from './types/UniversalType.type';
+import { SortNamesType } from './types/SortNames.type';
 
 const COUNT_COMMENTS: number = 5;
 const MAX_RATING = 5;
@@ -59,26 +60,25 @@ const CityNames: UniversalType[] = [
   },
 ];
 
-type SortNamesType = UniversalType[]
-
-const SortNames: SortNamesType = [
-  {
+const SortNames: SortNamesType = {
+  Popular: {
     name: 'Popular',
     id: nanoid()
   },
-  {
+  LowToHigh: {
     name: 'Price: low to high',
     id: nanoid()
   },
-  {
+  HighToLow: {
     name: 'Price: high to low',
     id: nanoid()
   },
-  {
+  TopRate: {
     name: 'Top rated first',
     id: nanoid()
   }
-];
+};
+
 
 const Section = {
   DEFAULT: 'DEFAULT',

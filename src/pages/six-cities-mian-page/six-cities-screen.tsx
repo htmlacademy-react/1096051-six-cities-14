@@ -4,13 +4,10 @@ import Map from '../../components/map/map';
 import Sort from '../../components/sort/sort';
 import { Section } from '../../const';
 import { City, OfferDataType } from '../../types/OfferData.type';
-import { UniversalType } from '../../types/UniversalType.type';
 import CityList from '../../components/city-list/city-list';
 import { useAppSelector } from '../../hooks';
 
 type SixCitiesScreenProps = {
-  currentSort: UniversalType;
-  sortNames: UniversalType[];
   onListItemHover: (listItemName: string) => void;
   city: City;
   selectedPoint: OfferDataType | undefined;
@@ -20,9 +17,7 @@ type SixCitiesScreenProps = {
 function SixCitiesScreen({
   onListItemHover,
   selectedPoint,
-  city,
-  currentSort,
-  sortNames }: SixCitiesScreenProps): JSX.Element {
+  city }: SixCitiesScreenProps): JSX.Element {
   const offerDataList = useAppSelector((state) => state.rentList);
   const currentCityNamer = useAppSelector((state) => state.currentCityName);
 
@@ -40,7 +35,7 @@ function SixCitiesScreen({
           <section className="cities__places places">
             <h2 className="visually-hidden">Places</h2>
             <b className="places__found">{offerDataList.length} places to stay in {currentCityNamer}</b>
-            <Sort currentSort={currentSort} sortNames={sortNames} />
+            <Sort />
             <div className="cities__places-list places__list tabs__content">
               <CityList onListItemHover={onListItemHover} dataList={offerDataList} section={Section.DEFAULT}></CityList>
             </div>

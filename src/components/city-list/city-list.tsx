@@ -1,4 +1,6 @@
+import { useAppSelector } from '../../hooks';
 import { CardData } from '../../types/CardData.type';
+import { SortNamesType } from '../../types/SortNames.type';
 import CityCard from '../city-card/city-card';
 
 type CityListProps = {
@@ -7,11 +9,41 @@ type CityListProps = {
   onListItemHover: (listItemName: string) => void;
 }
 
+type SortDataListProps = {
+  dataList: CardData[];
+  currentSort: string;
+  sortNames: SortNamesType;
+}
+
+function sortByPrice(dataList: CardData[], isHighToLow: boolean) {
+  const newDataList = [...dataList].sort((a, b) => isHighToLow ? b.price - a.price : a.price - b.price);
+  return newDataList;
+}
+
+function sortDataList({ dataList, currentSort, sortNames }: SortDataListProps) {
+  switch (currentSort) {
+    case sortNames.Popular.name:
+      return dataList;
+    case sortNames.HighToLow.name:
+      return sortByPrice(dataList, true);
+    case sortNames.LowToHigh.name:
+      return sortByPrice(dataList, false);
+    case sortNames.TopRate.name:
+      return [...dataList].sort((a, b) => b.rating - a.rating);
+  }
+
+  return dataList;
+}
+
 function CityList({
   dataList,
   section,
   onListItemHover
 }: CityListProps) {
+  const currentSort = useAppSelector((state) => state.currentSort);
+  const sortNames = useAppSelector((state) => state.sortNames);
+
+  const sortedDataList = sortDataList({ dataList, currentSort, sortNames });
 
   const handleListItemHover = (event: React.MouseEvent<HTMLElement>, listItemName: string) => {
     event.preventDefault();
@@ -19,7 +51,7 @@ function CityList({
   };
 
   return (
-    dataList.map((cardData) => <CityCard onListItemHover={handleListItemHover} data={cardData} key={cardData.id} section={section} />)
+    sortedDataList.map((cardData) => <CityCard onListItemHover={handleListItemHover} data={cardData} key={cardData.id} section={section} />)
   );
 }
 
