@@ -5,7 +5,6 @@ import LoginScreen from '../../pages/login-screen/login-screen';
 import OfferScreen from '../../pages/offer-screen/offer-screen';
 import SixCitiesScreen from '../../pages/six-cities-mian-page/six-cities-screen';
 import { FavoriteCardListType } from '../../types/FavoriteCard.type';
-import { UniversalType } from '../../types/UniversalType.type';
 import { UserType } from '../../types/User.type';
 import { BrowserRouter, Routes, Route } from 'react-router-dom';
 import { PrivateRouter } from '../private-route/private-route';
@@ -17,8 +16,6 @@ import { useState } from 'react';
 import { useAppSelector } from '../../hooks';
 
 type AppProps = {
-  currentSort: UniversalType;
-  sortNames: UniversalType[];
   favoriteCardList: FavoriteCardListType;
   commentDataList: CommentDataType[];
   user: UserType;
@@ -28,8 +25,6 @@ type AppProps = {
 
 function App({
   city,
-  currentSort,
-  sortNames,
   favoriteCardList,
   commentDataList,
   user,
@@ -56,8 +51,6 @@ function App({
                 onListItemHover={handleListItemHover}
                 selectedPoint={selectedPoint}
                 city={city}
-                currentSort={currentSort}
-                sortNames={sortNames}
               />
             }
             />

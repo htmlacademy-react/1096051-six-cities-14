@@ -1,9 +1,8 @@
 import React from 'react';
 import ReactDOM from 'react-dom/client';
 import App from './components/app/app';
-import { AuthorizationStatus, SortNames } from './const';
+import { AuthorizationStatus } from './const';
 import { createOfferDataList } from './mock/offer';
-import { getRandomPositiveInteger } from './utils/util';
 import { nanoid } from 'nanoid';
 import { getCommentDataList } from './mock/comment';
 import { getUserData } from './mock/user';
@@ -12,9 +11,7 @@ import { CITY } from './mock/city';
 import { Provider } from 'react-redux';
 import { store } from './store';
 
-const currentSort = SortNames[getRandomPositiveInteger(0, SortNames.length - 1)];
 const offersDataList = createOfferDataList();
-
 const offerCardDataList = offersDataList.map((offerData) => {
   const {
     city,
@@ -69,8 +66,6 @@ root.render(
     <Provider store={store}>
       <App
         city={CITY}
-        currentSort={currentSort}
-        sortNames={SortNames}
         favoriteCardList={getSortedFavoriteCardList()}
         commentDataList={getCommentDataList()}
         user={getUserData()}
