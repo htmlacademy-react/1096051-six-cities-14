@@ -1,10 +1,10 @@
 import { createAction } from '@reduxjs/toolkit';
 
-export const changeCity = createAction('changeCity', (cityName: string) => ({
+export const changeCity = createAction('locations/changeCity', (cityName: string) => ({
   payload: cityName
 }));
-export const changeCurrentSort = createAction('changeCurrentSort', (currentSort: string) => ({
+export const renderRentList = createAction('locations/renderRentList');
+export const changeCurrentSort = createAction('sort/changeCurrentSort', (currentSort: string) => ({
   payload: currentSort
 }));
-export const renderRentList = createAction('renderRentList');
 

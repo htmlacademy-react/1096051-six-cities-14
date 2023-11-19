@@ -15,12 +15,12 @@ type SortDataListProps = {
   sortNames: SortNamesType;
 }
 
-function sortByPrice(dataList: CardData[], isHighToLow: boolean) {
+function sortByPrice(dataList: CardData[], isHighToLow: boolean): CardData[] {
   const newDataList = [...dataList].sort((a, b) => isHighToLow ? b.price - a.price : a.price - b.price);
   return newDataList;
 }
 
-function sortDataList({ dataList, currentSort, sortNames }: SortDataListProps) {
+function sortDataList({ dataList, currentSort, sortNames }: SortDataListProps): CardData[] {
   switch (currentSort) {
     case sortNames.Popular.name:
       return dataList;
