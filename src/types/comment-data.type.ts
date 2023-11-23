@@ -1,4 +1,4 @@
-import { UserComment } from './User.type';
+import { UserComment } from './user.type';
 
 export type CommentDataType = {
   comment: string;

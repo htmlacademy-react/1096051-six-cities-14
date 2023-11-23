@@ -1,5 +1,5 @@
 import { createAction } from '@reduxjs/toolkit';
-import { OfferDataType } from '../types/OfferData.type';
+import { OfferDataType } from '../types/offer-data.type';
 
 export const changeCity = createAction('locations/changeCity', (cityName: string) => ({
   payload: cityName
@@ -11,5 +11,10 @@ export const changeCurrentSort = createAction('sort/changeCurrentSort', (current
   payload: currentSort
 }));
 
-export const loadCards = createAction<OfferDataType[]>('data/loadCards');
+export const loadOffers = createAction('data/loadOffers', (offersData: OfferDataType[]) => ({
+  payload: offersData
+}));
 
+export const requireAuthorization = createAction('user/requireAuthorization', (authorizationStatus: string) => ({
+  payload: authorizationStatus
+}));

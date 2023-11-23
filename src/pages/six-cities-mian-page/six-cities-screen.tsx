@@ -3,7 +3,7 @@ import LocationsList from '../../components/locations/locations';
 import Map from '../../components/map/map';
 import Sort from '../../components/sort/sort';
 import { Section } from '../../const';
-import { City, OfferDataType } from '../../types/OfferData.type';
+import { City, OfferDataType } from '../../types/offer-data.type';
 import CityList from '../../components/city-list/city-list';
 import { useAppSelector } from '../../hooks';
 

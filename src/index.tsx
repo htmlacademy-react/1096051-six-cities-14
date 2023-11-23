@@ -6,7 +6,7 @@ import { createOfferDataList } from './mock/offer';
 import { nanoid } from 'nanoid';
 import { getCommentDataList } from './mock/comment';
 import { getUserData } from './mock/user';
-import { FavoriteCardListType } from './types/FavoriteCard.type';
+import { FavoriteCardListType } from './types/favorite-card.type';
 import { CITY } from './mock/city';
 import { Provider } from 'react-redux';
 import { store } from './store';
