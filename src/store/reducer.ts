@@ -1,6 +1,6 @@
 import { createReducer } from '@reduxjs/toolkit';
 import { createOfferDataList } from '../mock/offer';
-import { changeCity, changeCurrentSort, renderRentList } from './action';
+import { changeCity, changeCurrentSort, loadCards, renderRentList } from './action';
 import { CityNames, SortNames } from '../const';
 
 const DEFAULT_CITY_NAME = CityNames[0].name;
@@ -25,5 +25,8 @@ export const reducer = createReducer(initialState, (builder) => {
     })
     .addCase(changeCurrentSort, (state, action) => {
       state.currentSort = action.payload;
+    })
+    .addCase(loadCards, (state, action) => {
+      state.rentList = action.payload;
     });
 });
