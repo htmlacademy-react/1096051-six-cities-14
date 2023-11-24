@@ -15,23 +15,51 @@ import { HelmetProvider } from 'react-helmet-async';
 import { useState } from 'react';
 import { useAppSelector } from '../../hooks';
 import LoadingScreen from '../loading-screen/loading-screen';
+import { nanoid } from 'nanoid';
 
 type AppProps = {
-  favoriteCardList: FavoriteCardListType;
   commentDataList: CommentDataType[];
   user: UserType;
   authStatus: string;
   city: City;
 }
 
+
+function getSortedFavoriteCardList(offersData: OfferDataType[]) {
+
+  const favoriteCardList = offersData
+    .filter(({ isFavorite }) => isFavorite);
+
+  const cityNamesList = favoriteCardList
+    .map(({ city }) => city.name);
+
+  const sortedFavoriteCardList: FavoriteCardListType = cityNamesList
+    .map((name) => {
+      const dataList = favoriteCardList
+        .filter(({ city }) => city.name === name)
+        .map(({ ...data }) => data);
+
+      return {
+        id: nanoid(),
+        cityName: name,
+        dataList
+      };
+    });
+
+  return sortedFavoriteCardList;
+}
+
 function App({
   city,
-  favoriteCardList,
   commentDataList,
   user,
   authStatus }: AppProps): JSX.Element {
   const authorizationStatus = useAppSelector((state) => state.authorizationStatus);
   const isOfferDataLoading = useAppSelector((state) => state.isOffersDataLoading);
+  const [selectedPoint, setSelectedPoint] = useState<OfferDataType | undefined>(
+    undefined
+  );
+  const offerCardList = useAppSelector((state) => state.rentList);
 
   if (authorizationStatus === AuthorizationStatus.Unknown || isOfferDataLoading) {
     return (
@@ -39,13 +67,10 @@ function App({
     );
   }
 
-  const [selectedPoint, setSelectedPoint] = useState<OfferDataType | undefined>(
-    undefined
-  );
 
-  const offerCardList = useAppSelector((state) => state.rentList);
   const handleListItemHover = (listItemName: string) => {
-    const currentPoint = offerCardList.find(({ title }) => title === listItemName);
+    const currentPoint = offerCardList
+      .find(({ title }) => title === listItemName);
 
     setSelectedPoint(currentPoint);
   };
@@ -67,7 +92,7 @@ function App({
               <PrivateRouter authStatus={authStatus} deniedPath={PagePaths.LOGIN}>
                 <FavortitesScreen
                   handleListItemHover={handleListItemHover}
-                  favoriteCardList={favoriteCardList}
+                  favoriteCardList={getSortedFavoriteCardList(offerCardList)}
                 />
               </PrivateRouter>
             }
