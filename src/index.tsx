@@ -10,6 +10,7 @@ import { FavoriteCardListType } from './types/favorite-card.type';
 import { CITY } from './mock/city';
 import { Provider } from 'react-redux';
 import { store } from './store';
+import ErrorMessage from './components/error-message/error-message';
 
 const offersDataList = createOfferDataList();
 const offerCardDataList = offersDataList.map((offerData) => {
@@ -64,6 +65,7 @@ const root = ReactDOM.createRoot(
 root.render(
   <React.StrictMode>
     <Provider store={store}>
+      <ErrorMessage />
       <App
         city={CITY}
         favoriteCardList={getSortedFavoriteCardList()}
