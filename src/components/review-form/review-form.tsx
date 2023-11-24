@@ -1,6 +1,6 @@
 import { useState } from 'react';
 import { StarsRate } from '../../const';
-import { Star } from '../../types/star.type';
+import { Star } from '../../types/star-type';
 
 type StarProps = Star
 
