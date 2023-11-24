@@ -1,6 +1,6 @@
 import { Link } from 'react-router-dom';
 import { useAppDispatch, useAppSelector } from '../../hooks';
-import { UniversalType } from '../../types/universal.type';
+import { UniversalType } from '../../types/universal-type';
 import { changeCity } from '../../store/action';
 
 type LocationItemProps = UniversalType

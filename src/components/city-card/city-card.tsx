@@ -3,7 +3,7 @@ import { PagePaths, Section } from '../../const';
 import { getWidthRatingProperty } from '../../utils/util';
 import Bookmark from '../bookmark/bookmark';
 import { useState } from 'react';
-import { CardData } from '../../types/card-data.type';
+import { CardData } from '../../types/card-data-type';
 
 type CitiesCardProps = {
   section: string;

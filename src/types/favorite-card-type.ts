@@ -1,4 +1,4 @@
-import { CardData } from './card-data.type';
+import { CardData } from './card-data-type';
 
 export type FavoriteItemDataType = {
   cityName: string;

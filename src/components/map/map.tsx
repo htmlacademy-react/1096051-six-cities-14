@@ -1,6 +1,6 @@
 import { useRef, useEffect } from 'react';
 import { Section, UrlMarker } from '../../const';
-import { City, OfferDataType } from '../../types/offer-data.type';
+import { City, OfferDataType } from '../../types/offer-data-type';
 import { Icon, Marker, layerGroup } from 'leaflet';
 import useMap from '../../hooks/use-map';
 import 'leaflet/dist/leaflet.css';

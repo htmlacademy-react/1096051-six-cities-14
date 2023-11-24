@@ -1,5 +1,5 @@
 import { createAction } from '@reduxjs/toolkit';
-import { OfferDataType } from '../types/offer-data.type';
+import { OfferDataType } from '../types/offer-data-type';
 
 export const changeCity = createAction('locations/changeCity', (cityName: string) => ({
   payload: cityName

@@ -1,11 +1,11 @@
 import { createAsyncThunk } from '@reduxjs/toolkit';
-import { AppDispatch, State } from '../types/state';
+import { AppDispatch, State } from '../types/state-type';
 import { AxiosInstance } from 'axios';
-import { OfferDataType } from '../types/offer-data.type';
+import { OfferDataType } from '../types/offer-data-type';
 import { APIRoute, AuthorizationStatus, TIMEOUT_SHOW_ERROR } from '../const';
 import { loadOffers, requireAuthorization, setError, setOffersDataLoadingStatus } from './action';
-import { AuthData } from '../types/auth-data.type';
-import { UserType } from '../types/user.type';
+import { AuthData } from '../types/auth-data-type';
+import { UserType } from '../types/user-type';
 import { dropToken, saveToken } from '../services/token';
 import { store } from '.';
 

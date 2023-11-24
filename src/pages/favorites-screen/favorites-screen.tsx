@@ -1,6 +1,6 @@
 import { Helmet } from 'react-helmet-async';
 import { Section } from '../../const';
-import { FavoriteCardListType, FavoriteItemDataType } from '../../types/favorite-card.type';
+import { FavoriteCardListType, FavoriteItemDataType } from '../../types/favorite-card-type';
 import CityList from '../../components/city-list/city-list';
 
 type FavoriteItemProps = FavoriteItemDataType &{

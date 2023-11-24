@@ -1,7 +1,7 @@
 import { nanoid } from 'nanoid';
-import { UniversalType } from './types/universal.type';
-import { SortNamesType } from './types/sort-names.type';
-import { AuthorizationStatus } from './types/authorization-status.type';
+import { UniversalType } from './types/universal-type';
+import { SortNamesType } from './types/sort-names-type';
+import { AuthorizationStatus } from './types/authorization-status-type';
 
 const COUNT_COMMENTS: number = 5;
 const MAX_RATING = 5;

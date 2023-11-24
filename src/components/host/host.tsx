@@ -1,4 +1,4 @@
-import { HostType } from '../../types/offer-data.type';
+import { HostType } from '../../types/offer-data-type';
 
 type HostPorps = {
   host: HostType;

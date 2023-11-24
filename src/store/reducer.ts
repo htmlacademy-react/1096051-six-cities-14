@@ -1,9 +1,9 @@
 import { createReducer } from '@reduxjs/toolkit';
 import { changeCity, changeCurrentSort, loadOffers, requireAuthorization, setError, setOffersDataLoadingStatus } from './action';
 import { AuthorizationStatus, CityNames, SortNames } from '../const';
-import { UniversalType } from '../types/universal.type';
-import { SortNamesType } from '../types/sort-names.type';
-import { OfferDataType } from '../types/offer-data.type';
+import { UniversalType } from '../types/universal-type';
+import { SortNamesType } from '../types/sort-names-type';
+import { OfferDataType } from '../types/offer-data-type';
 
 const DEFAULT_CITY_NAME = CityNames[0].name;
 const DEFAULT_SORT = 'Popular';

@@ -1,6 +1,6 @@
 import { useAppSelector } from '../../hooks';
-import { CardData } from '../../types/card-data.type';
-import { SortNamesType } from '../../types/sort-names.type';
+import { CardData } from '../../types/card-data-type';
+import { SortNamesType } from '../../types/sort-names-type';
 import CityCard from '../city-card/city-card';
 
 type CityListProps = {

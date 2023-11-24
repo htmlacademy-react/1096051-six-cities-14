@@ -1,4 +1,4 @@
-import { CommentDataType } from '../../types/comment-data.type';
+import { CommentDataType } from '../../types/comment-data-type';
 import { getWidthRatingProperty } from '../../utils/util';
 import ReviewForm from '../review-form/review-form';
 

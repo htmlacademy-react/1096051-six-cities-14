@@ -1,4 +1,4 @@
-import { City } from '../types/offer-data.type';
+import { City } from '../types/offer-data-type';
 
 export const CITY: City = {
   name: 'Нью-Йорк',
