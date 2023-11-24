@@ -5,8 +5,6 @@ export const changeCity = createAction('locations/changeCity', (cityName: string
   payload: cityName
 }));
 
-export const renderRentList = createAction('locations/renderRentList');
-
 export const changeCurrentSort = createAction('sort/changeCurrentSort', (currentSort: string) => ({
   payload: currentSort
 }));
@@ -19,5 +17,6 @@ export const requireAuthorization = createAction('user/requireAuthorization', (a
   payload: authorizationStatus
 }));
 
-
 export const setError = createAction<string | null>('general/setError');
+
+export const setOffersDataLoadingStatus = createAction<boolean>('data/setOffersDataLoadingStatus');

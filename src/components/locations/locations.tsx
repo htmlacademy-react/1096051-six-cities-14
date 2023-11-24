@@ -1,7 +1,7 @@
 import { Link } from 'react-router-dom';
 import { useAppDispatch, useAppSelector } from '../../hooks';
 import { UniversalType } from '../../types/universal.type';
-import { changeCity, renderRentList } from '../../store/action';
+import { changeCity } from '../../store/action';
 
 type LocationItemProps = UniversalType
 
@@ -13,7 +13,7 @@ function LocationItem({ name, id }: LocationItemProps): JSX.Element {
       <Link onClick={
         () => {
           dispatch(changeCity(name));
-          dispatch(renderRentList());
+          // dispatch(renderRentList()); to do
         }
       } className="locations__item-link tabs__item" id={id} to="#"
       >

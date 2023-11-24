@@ -10,10 +10,11 @@ import { BrowserRouter, Routes, Route } from 'react-router-dom';
 import { PrivateRouter } from '../private-route/private-route';
 import { CommentDataType } from '../../types/comment-data.type';
 import { City, OfferDataType } from '../../types/offer-data.type';
-import { PagePaths } from '../../const';
+import { AuthorizationStatus, PagePaths } from '../../const';
 import { HelmetProvider } from 'react-helmet-async';
 import { useState } from 'react';
 import { useAppSelector } from '../../hooks';
+import LoadingScreen from '../loading-screen/loading-screen';
 
 type AppProps = {
   favoriteCardList: FavoriteCardListType;
@@ -29,6 +30,14 @@ function App({
   commentDataList,
   user,
   authStatus }: AppProps): JSX.Element {
+  const authorizationStatus = useAppSelector((state) => state.authorizationStatus);
+  const isOfferDataLoading = useAppSelector((state) => state.isOffersDataLoading);
+
+  if (authorizationStatus === AuthorizationStatus.Unknown || isOfferDataLoading) {
+    return (
+      <LoadingScreen />
+    );
+  }
 
   const [selectedPoint, setSelectedPoint] = useState<OfferDataType | undefined>(
     undefined
