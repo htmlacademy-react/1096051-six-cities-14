@@ -1,6 +1,6 @@
 import { createReducer } from '@reduxjs/toolkit';
 import { createOfferDataList } from '../mock/offer';
-import { changeCity, changeCurrentSort, loadOffers, renderRentList, requireAuthorization } from './action';
+import { changeCity, changeCurrentSort, loadOffers, renderRentList, requireAuthorization, setError } from './action';
 import { AuthorizationStatus, CityNames, SortNames } from '../const';
 import { UniversalType } from '../types/universal.type';
 import { SortNamesType } from '../types/sort-names.type';
@@ -15,6 +15,7 @@ type InitialState = {
   currentSort: string;
   sortNames: SortNamesType;
   authorizationStatus: string;
+  error: string | null;
 }
 
 const initialState: InitialState = {
@@ -23,7 +24,8 @@ const initialState: InitialState = {
   cityNames: CityNames,
   currentSort: DEFAULT_SORT,
   sortNames: SortNames,
-  authorizationStatus: AuthorizationStatus.Unknown
+  authorizationStatus: AuthorizationStatus.Unknown,
+  error: null,
 };
 
 
@@ -43,5 +45,8 @@ export const reducer = createReducer(initialState, (builder) => {
     })
     .addCase(requireAuthorization, (state, action) => {
       state.authorizationStatus = action.payload;
+    })
+    .addCase(setError, (state, action) => {
+      state.error = action.payload;
     });
 });

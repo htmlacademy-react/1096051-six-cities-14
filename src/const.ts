@@ -5,6 +5,7 @@ import { AuthorizationStatus } from './types/authorization-status.type';
 
 const COUNT_COMMENTS: number = 5;
 const MAX_RATING = 5;
+const TIMEOUT_SHOW_ERROR = 2000;
 
 const StarsRate = [
   {
@@ -113,4 +114,15 @@ const UrlMarker = {
   Current: 'https://assets.htmlacademy.ru/content/intensive/javascript-1/demo/interactive-map/main-pin.svg'
 };
 
-export { UrlMarker, CityNames, SortNames, Section, StarsRate, COUNT_COMMENTS, MAX_RATING, PagePaths, AuthorizationStatus };
+export {
+  UrlMarker,
+  CityNames,
+  SortNames,
+  Section,
+  StarsRate,
+  COUNT_COMMENTS,
+  MAX_RATING,
+  PagePaths,
+  AuthorizationStatus,
+  TIMEOUT_SHOW_ERROR
+};

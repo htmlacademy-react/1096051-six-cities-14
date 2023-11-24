@@ -18,3 +18,6 @@ export const loadOffers = createAction('data/loadOffers', (offersData: OfferData
 export const requireAuthorization = createAction('user/requireAuthorization', (authorizationStatus: string) => ({
   payload: authorizationStatus
 }));
+
+
+export const setError = createAction<string | null>('general/setError');
