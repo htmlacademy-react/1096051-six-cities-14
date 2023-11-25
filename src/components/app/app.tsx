@@ -16,6 +16,8 @@ import { useState } from 'react';
 import { useAppSelector } from '../../hooks';
 import LoadingScreen from '../loading-screen/loading-screen';
 import { nanoid } from 'nanoid';
+import HistoryRouter from '../history-router/history-router';
+import browserHistory from '../../browser-history';
 
 type AppProps = {
   commentDataList: CommentDataType[];
@@ -75,7 +77,7 @@ function App({
 
   return (
     <HelmetProvider>
-      <BrowserRouter>
+      <HistoryRouter history={browserHistory}>
         <Routes>
           <Route path={PagePaths.MAIN} element={<Layout user={user} />}>
             <Route index element={
@@ -114,7 +116,7 @@ function App({
             <Route path='*' element={<ErrorScreen />}></Route>
           </Route>
         </Routes>
-      </BrowserRouter >
+      </HistoryRouter>
     </HelmetProvider>
   );
 }

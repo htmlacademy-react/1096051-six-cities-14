@@ -1,7 +1,8 @@
 import { Link } from 'react-router-dom';
 import { UserType } from '../../types/user-type';
 import { AuthorizationStatus, PagePaths } from '../../const';
-import { useAppSelector } from '../../hooks';
+import { useAppDispatch, useAppSelector } from '../../hooks';
+import { logoutAction } from '../../store/api-actions';
 
 type HeaderProps = {
   user: UserType;
@@ -10,6 +11,7 @@ type HeaderProps = {
 
 function Header({ user, handlePagePath }: HeaderProps): JSX.Element {
   const authorizationStatus = useAppSelector((state) => state.authorizationStatus);
+  const dispatch = useAppDispatch();
 
   const {
     avatarUrl,
@@ -40,7 +42,11 @@ function Header({ user, handlePagePath }: HeaderProps): JSX.Element {
                   </Link>}
               </li>
               <li className="header__nav-item">
-                <Link onClick={() => handlePagePath(PagePaths.MAIN)} className="header__nav-link" to={PagePaths.MAIN}>
+                <Link onClick={() => {
+                  handlePagePath(PagePaths.MAIN);
+                  dispatch(logoutAction());
+                }} className="header__nav-link" to={PagePaths.MAIN}
+                >
                   <span className="header__signout">Sign out</span>
                 </Link>
               </li>

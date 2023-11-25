@@ -27,6 +27,8 @@ function Layout({ user }: LayoutProps): JSX.Element {
     setPagePath(path);
   }
 
+  console.log(getPageClassName(pagePath))
+
   return (
     <div className={`page ${getPageClassName(pagePath)}`}>
       <Header user={user} handlePagePath={handlePagePath}/>
