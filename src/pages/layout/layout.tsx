@@ -7,7 +7,6 @@ import { useState } from 'react';
 
 type LayoutProps = {
   user: UserType;
-  authStatus: string;
 }
 
 function getPageClassName(currentPage: string): string | undefined {
@@ -21,7 +20,7 @@ function getPageClassName(currentPage: string): string | undefined {
   }
 }
 
-function Layout({ user, authStatus }: LayoutProps): JSX.Element {
+function Layout({ user }: LayoutProps): JSX.Element {
   const [pagePath, setPagePath] = useState(PagePaths.MAIN);
 
   function handlePagePath(path: string): void {
@@ -30,7 +29,7 @@ function Layout({ user, authStatus }: LayoutProps): JSX.Element {
 
   return (
     <div className={`page ${getPageClassName(pagePath)}`}>
-      <Header user={user} handlePagePath={handlePagePath} authStatus={authStatus}/>
+      <Header user={user} handlePagePath={handlePagePath}/>
       <Outlet />
       {pagePath !== PagePaths.MAIN && <Footer handlePagePath={handlePagePath} />}
     </div>

@@ -1,7 +1,6 @@
 import React from 'react';
 import ReactDOM from 'react-dom/client';
 import App from './components/app/app';
-import { AuthorizationStatus } from './const';
 import { getCommentDataList } from './mock/comment';
 import { getUserData } from './mock/user';
 import { CITY } from './mock/city';
@@ -25,7 +24,6 @@ root.render(
         city={CITY}
         commentDataList={getCommentDataList()}
         user={getUserData()}
-        authStatus={AuthorizationStatus.Auth}
       />
     </Provider>
   </React.StrictMode>

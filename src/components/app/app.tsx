@@ -20,7 +20,6 @@ import { nanoid } from 'nanoid';
 type AppProps = {
   commentDataList: CommentDataType[];
   user: UserType;
-  authStatus: string;
   city: City;
 }
 
@@ -52,8 +51,7 @@ function getSortedFavoriteCardList(offersData: OfferDataType[]) {
 function App({
   city,
   commentDataList,
-  user,
-  authStatus }: AppProps): JSX.Element {
+  user }: AppProps): JSX.Element {
   const authorizationStatus = useAppSelector((state) => state.authorizationStatus);
   const isOfferDataLoading = useAppSelector((state) => state.isOffersDataLoading);
   const [selectedPoint, setSelectedPoint] = useState<OfferDataType | undefined>(
@@ -79,7 +77,7 @@ function App({
     <HelmetProvider>
       <BrowserRouter>
         <Routes>
-          <Route path={PagePaths.MAIN} element={<Layout user={user} authStatus={authStatus} />}>
+          <Route path={PagePaths.MAIN} element={<Layout user={user} />}>
             <Route index element={
               <SixCitiesScreen
                 onListItemHover={handleListItemHover}
@@ -89,7 +87,7 @@ function App({
             }
             />
             <Route path={PagePaths.FAVORITES} element={
-              <PrivateRouter authStatus={authStatus} deniedPath={PagePaths.LOGIN}>
+              <PrivateRouter deniedPath={PagePaths.LOGIN}>
                 <FavortitesScreen
                   handleListItemHover={handleListItemHover}
                   favoriteCardList={getSortedFavoriteCardList(offerCardList)}
@@ -108,7 +106,7 @@ function App({
             }
             />
             <Route path={PagePaths.LOGIN} element={
-              <PrivateRouter authStatus={authStatus} deniedPath={PagePaths.MAIN}>
+              <PrivateRouter deniedPath={PagePaths.MAIN}>
                 <LoginScreen />
               </PrivateRouter>
             }
