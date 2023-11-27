@@ -1,5 +1,5 @@
 import { Link } from 'react-router-dom';
-import { UserType } from '../../types/User.type';
+import { UserType } from '../../types/user-type';
 import { AuthorizationStatus, PagePaths } from '../../const';
 
 type HeaderProps = {

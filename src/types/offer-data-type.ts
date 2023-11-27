@@ -1,4 +1,4 @@
-import { CardData } from './CardData.type';
+import { CardData } from './card-data-type';
 
 export type HostType = {
   avatarUrl: string;

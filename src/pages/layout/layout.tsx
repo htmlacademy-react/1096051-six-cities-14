@@ -1,6 +1,6 @@
 import { Outlet } from 'react-router-dom';
 import Header from '../../components/header/header';
-import { UserType } from '../../types/User.type';
+import { UserType } from '../../types/user-type';
 import { PagePaths } from '../../const';
 import Footer from '../../components/footer/footer';
 import { useState } from 'react';

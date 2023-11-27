@@ -1,7 +1,7 @@
 import { nanoid } from 'nanoid';
 import { COUNT_COMMENTS, MAX_RATING } from '../const';
 import { getRandomPositiveInteger } from '../utils/util';
-import { CommentDataType } from '../types/CommentData.type';
+import { CommentDataType } from '../types/comment-data-type';
 
 
 function createCommentData() {

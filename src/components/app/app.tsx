@@ -4,39 +4,73 @@ import { Layout } from '../../pages/layout/layout';
 import LoginScreen from '../../pages/login-screen/login-screen';
 import OfferScreen from '../../pages/offer-screen/offer-screen';
 import SixCitiesScreen from '../../pages/six-cities-mian-page/six-cities-screen';
-import { FavoriteCardListType } from '../../types/FavoriteCard.type';
-import { UserType } from '../../types/User.type';
+import { FavoriteCardListType } from '../../types/favorite-card-type';
+import { UserType } from '../../types/user-type';
 import { BrowserRouter, Routes, Route } from 'react-router-dom';
 import { PrivateRouter } from '../private-route/private-route';
-import { CommentDataType } from '../../types/CommentData.type';
-import { City, OfferDataType } from '../../types/OfferData.type';
-import { PagePaths } from '../../const';
+import { CommentDataType } from '../../types/comment-data-type';
+import { City, OfferDataType } from '../../types/offer-data-type';
+import { AuthorizationStatus, PagePaths } from '../../const';
 import { HelmetProvider } from 'react-helmet-async';
 import { useState } from 'react';
 import { useAppSelector } from '../../hooks';
+import LoadingScreen from '../loading-screen/loading-screen';
+import { nanoid } from 'nanoid';
 
 type AppProps = {
-  favoriteCardList: FavoriteCardListType;
   commentDataList: CommentDataType[];
   user: UserType;
   authStatus: string;
   city: City;
 }
 
+
+function getSortedFavoriteCardList(offersData: OfferDataType[]) {
+
+  const favoriteCardList = offersData
+    .filter(({ isFavorite }) => isFavorite);
+
+  const cityNamesList = favoriteCardList
+    .map(({ city }) => city.name);
+
+  const sortedFavoriteCardList: FavoriteCardListType = cityNamesList
+    .map((name) => {
+      const dataList = favoriteCardList
+        .filter(({ city }) => city.name === name)
+        .map(({ ...data }) => data);
+
+      return {
+        id: nanoid(),
+        cityName: name,
+        dataList
+      };
+    });
+
+  return sortedFavoriteCardList;
+}
+
 function App({
   city,
-  favoriteCardList,
   commentDataList,
   user,
   authStatus }: AppProps): JSX.Element {
-
+  const authorizationStatus = useAppSelector((state) => state.authorizationStatus);
+  const isOfferDataLoading = useAppSelector((state) => state.isOffersDataLoading);
   const [selectedPoint, setSelectedPoint] = useState<OfferDataType | undefined>(
     undefined
   );
-
   const offerCardList = useAppSelector((state) => state.rentList);
+
+  if (authorizationStatus === AuthorizationStatus.Unknown || isOfferDataLoading) {
+    return (
+      <LoadingScreen />
+    );
+  }
+
+
   const handleListItemHover = (listItemName: string) => {
-    const currentPoint = offerCardList.find(({ title }) => title === listItemName);
+    const currentPoint = offerCardList
+      .find(({ title }) => title === listItemName);
 
     setSelectedPoint(currentPoint);
   };
@@ -58,7 +92,7 @@ function App({
               <PrivateRouter authStatus={authStatus} deniedPath={PagePaths.LOGIN}>
                 <FavortitesScreen
                   handleListItemHover={handleListItemHover}
-                  favoriteCardList={favoriteCardList}
+                  favoriteCardList={getSortedFavoriteCardList(offerCardList)}
                 />
               </PrivateRouter>
             }
