@@ -35,6 +35,7 @@ function OfferScreen({
 
   if (offerData) {
     const {
+      id,
       host,
       description,
       goods,
@@ -64,7 +65,7 @@ function OfferScreen({
                 <h1 className="offer__name">
                   {title}
                 </h1>
-                <Bookmark isFavorite={isFavorite} section={Section.OFFER} />
+                <Bookmark offerID={id} isFavorite={isFavorite} section={Section.OFFER} />
               </div>
               <div className="offer__rating rating">
                 <div className="offer__stars rating__stars">
