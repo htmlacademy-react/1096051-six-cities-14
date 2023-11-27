@@ -2,7 +2,7 @@ import './loading-screeen.css';
 
 function LoadingScreen(): JSX.Element {
   return (
-    <svg>
+    <svg className='loading'>
       <g>
         <path d="M 50,100 A 1,1 0 0 1 50,0" />
       </g>

@@ -1,11 +1,18 @@
+import { useState } from 'react';
 import { Section } from '../../const';
+import { useAppDispatch } from '../../hooks';
+import { changeOfferFavoriteStatus } from '../../store/api-actions';
 
 type BookmarkProps = {
   isFavorite: boolean;
   section: string;
+  offerID: string;
 }
 
-function Bookmark({isFavorite, section}: BookmarkProps): JSX.Element {
+function Bookmark({ offerID, isFavorite, section }: BookmarkProps): JSX.Element {
+  const [isFavoriteState, setIsFavoriteState] = useState(isFavorite);
+  const dispatch = useAppDispatch();
+
   let width: number;
   let height: number;
   let classContainer: string;
@@ -23,12 +30,19 @@ function Bookmark({isFavorite, section}: BookmarkProps): JSX.Element {
   }
 
   return (
-    <button className={`${classContainer}__bookmark-button ${isFavorite ? `${classContainer}__bookmark-button--active` : ''} button`} type="button">
+    <button onClick={() => {
+      dispatch(changeOfferFavoriteStatus({
+        offerID,
+        status: Number(!isFavoriteState)
+      }));
+      setIsFavoriteState(!isFavoriteState);
+    }} className={`${classContainer}__bookmark-button ${isFavoriteState ? `${classContainer}__bookmark-button--active` : ''} button`} type="button"
+    >
       <svg className={`${classContainer}__bookmark-icon`} width={width} height={height}>
         <use xlinkHref="#icon-bookmark"></use>
       </svg>
-      <span className="visually-hidden">{isFavorite ? 'In bookmarks' : 'To bookmarks'}</span>
-    </button>
+      <span className="visually-hidden">{isFavoriteState ? 'In bookmarks' : 'To bookmarks'}</span>
+    </button >
   );
 }
 

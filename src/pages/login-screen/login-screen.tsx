@@ -1,19 +1,21 @@
 import { useRef } from 'react';
 import { Helmet } from 'react-helmet-async';
-import { Link, useNavigate } from 'react-router-dom';
+import { Link } from 'react-router-dom';
 import { useAppDispatch } from '../../hooks';
 import { AuthData } from '../../types/auth-data-type';
 import { loginAction } from '../../store/api-actions';
+import { changePagePath } from '../../store/action';
+import { PagePaths } from '../../const';
 
 function LoginScreen(): JSX.Element {
   const emailRef = useRef<HTMLInputElement | null>(null);
   const passwordRef = useRef<HTMLInputElement | null>(null);
 
   const dispatch = useAppDispatch();
-  const navigate = useNavigate();
 
   const onSubmit = (authData: AuthData) => {
     dispatch(loginAction(authData));
+    dispatch(changePagePath(PagePaths.MAIN));
   };
 
   const handleSubmit = (evt: React.FormEvent<HTMLFormElement>) => {

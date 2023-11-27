@@ -1,9 +1,10 @@
-import { Link } from 'react-router-dom';
-import { PagePaths, Section } from '../../const';
+import { Section } from '../../const';
 import { getWidthRatingProperty } from '../../utils/util';
 import Bookmark from '../bookmark/bookmark';
 import { useState } from 'react';
 import { CardData } from '../../types/card-data-type';
+import { useAppDispatch } from '../../hooks';
+import { fetchCommentAction, fetchOfferByIdAction } from '../../store/api-actions';
 
 type CitiesCardProps = {
   section: string;
@@ -12,6 +13,8 @@ type CitiesCardProps = {
 };
 
 function CityCard({ data, section = Section.DEFAULT, onListItemHover }: CitiesCardProps): JSX.Element {
+  const dispatch = useAppDispatch();
+
   const {
     isPremium,
     isFavorite,
@@ -43,34 +46,38 @@ function CityCard({ data, section = Section.DEFAULT, onListItemHover }: CitiesCa
       setIsActive(true);
     }} onMouseOut={() => setIsActive(false)} className={`${containerClassName}__card place-card`}
     >
-      <Link to={`${PagePaths.OFFER}/${id}`}>
-        {isPremium ?
-          <div className="place-card__mark">
-            <span>Premium</span>
-          </div> : ''}
-        <div className={`${containerClassName}__image-wrapper place-card__image-wrapper`}>
-
-          <img className="place-card__image" src={previewImage} width="260" height="200" alt="Place image" />
-
+      {isPremium ?
+        <div className="place-card__mark">
+          <span>Premium</span>
         </div>
-        <div className="place-card__info">
-          <div className="place-card__price-wrapper">
-            <div className="place-card__price">
-              <b className="place-card__price-value">&euro;{price}</b>
-              <span className="place-card__price-text">&#47;&nbsp;night</span>
-            </div>
-            <Bookmark isFavorite={isFavorite} section={Section.DEFAULT} />
+        :
+        ''}
+      <div
+        onClick={() => {
+          dispatch(fetchOfferByIdAction(id));
+          dispatch(fetchCommentAction(id));
+        }}
+        className={`${containerClassName}__image-wrapper place-card__image-wrapper`}
+      >
+        <img className="place-card__image" src={previewImage} width="260" height="200" alt="Place image" />
+      </div>
+      <div className="place-card__info">
+        <div className="place-card__price-wrapper">
+          <div className="place-card__price">
+            <b className="place-card__price-value">&euro;{price}</b>
+            <span className="place-card__price-text">&#47;&nbsp;night</span>
           </div>
-          <div className="place-card__rating rating">
-            <div className="place-card__stars rating__stars">
-              <span style={{ width: getWidthRatingProperty(rating) }}></span>
-              <span className="visually-hidden">Rating</span>
-            </div>
-          </div>
-          <h2 className="place-card__name">{title}</h2>
-          <p className="place-card__type">{type}</p>
+          <Bookmark offerID={id} isFavorite={isFavorite} section={Section.DEFAULT} />
         </div>
-      </Link>
+        <div className="place-card__rating rating">
+          <div className="place-card__stars rating__stars">
+            <span style={{ width: getWidthRatingProperty(rating) }}></span>
+            <span className="visually-hidden">Rating</span>
+          </div>
+        </div>
+        <h2 className="place-card__name">{title}</h2>
+        <p className="place-card__type">{type}</p>
+      </div>
     </article>
   );
 }

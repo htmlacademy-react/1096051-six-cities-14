@@ -1,21 +1,7 @@
+import { useAppSelector } from '../../hooks';
 import { CommentDataType } from '../../types/comment-data-type';
 import { getWidthRatingProperty } from '../../utils/util';
 import ReviewForm from '../review-form/review-form';
-
-type ReviewProps = {
-  commentDataList: {
-    comment: string;
-    date: string;
-    id: string;
-    rating: number;
-    user: {
-      avatarUrl: string;
-      id: number;
-      isPro: boolean;
-      name: string;
-    };
-  }[];
-}
 
 type CommentProps = {
   commentData: CommentDataType;
@@ -61,7 +47,8 @@ function Comment({ commentData }: CommentProps): JSX.Element {
   );
 }
 
-function Review({ commentDataList }: ReviewProps): JSX.Element {
+function Review(): JSX.Element {
+  const commentDataList = useAppSelector((state) => state.commentList);
 
   return (
     <section className="offer__reviews reviews">

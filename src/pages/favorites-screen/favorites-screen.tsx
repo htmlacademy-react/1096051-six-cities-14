@@ -1,40 +1,42 @@
 import { Helmet } from 'react-helmet-async';
 import { Section } from '../../const';
-import { FavoriteCardListType, FavoriteItemDataType } from '../../types/favorite-card-type';
 import CityList from '../../components/city-list/city-list';
+import { useAppSelector } from '../../hooks';
 
-type FavoriteItemProps = FavoriteItemDataType &{
+type FavoriteItemProps = {
   handleListItemHover: (listItemName: string) => void;
 }
 
 function FavoriteItem({
-  cityName,
-  dataList,
   handleListItemHover,
-}: FavoriteItemProps): JSX.Element {
+}: FavoriteItemProps): JSX.Element | string {
+  const favoriteOffersList = useAppSelector((state) => state.favoriteOffersList);
+  const currentCityName = useAppSelector((state) => state.currentCityName);
+
   return (
-    <li className="favorites__locations-items">
-      <div className="favorites__locations locations locations--current">
-        <div className="locations__item">
-          <a className="locations__item-link" href="#">
-            <span>{cityName}</span>
-          </a>
+    favoriteOffersList ?
+      <li className="favorites__locations-items">
+        <div className="favorites__locations locations locations--current">
+          <div className="locations__item">
+            <a className="locations__item-link" href="#">
+              <span>{currentCityName}</span>
+            </a>
+          </div>
         </div>
-      </div>
-      <div className="favorites__places">
-        <CityList onListItemHover={handleListItemHover} dataList={dataList} section={Section.FAVORITE}></CityList>
-      </div>
-    </li>
+        <div className="favorites__places">
+          <CityList onListItemHover={handleListItemHover} dataList={favoriteOffersList} section={Section.FAVORITE}></CityList>
+        </div>
+      </li>
+      :
+      ''
   );
 }
 
 type FavortitesScreenProps = {
-  favoriteCardList: FavoriteCardListType;
   handleListItemHover: (listItemName: string) => void;
 };
 
 function FavortitesScreen({
-  favoriteCardList,
   handleListItemHover
 }: FavortitesScreenProps): JSX.Element {
   return (
@@ -44,7 +46,7 @@ function FavortitesScreen({
         <section className="favorites">
           <h1 className="favorites__title">Saved listing</h1>
           <ul className="favorites__list">
-            {favoriteCardList.map(({ cityName, dataList, id }) => <FavoriteItem handleListItemHover={handleListItemHover} cityName={cityName} dataList={dataList} key={id} />)}
+            <FavoriteItem handleListItemHover={handleListItemHover} />
           </ul>
         </section>
       </div>

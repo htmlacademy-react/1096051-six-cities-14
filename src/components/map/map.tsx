@@ -1,6 +1,6 @@
 import { useRef, useEffect } from 'react';
 import { Section, UrlMarker } from '../../const';
-import { City, OfferDataType } from '../../types/offer-data-type';
+import { OfferDataType } from '../../types/offer-data-type';
 import { Icon, Marker, layerGroup } from 'leaflet';
 import useMap from '../../hooks/use-map';
 import 'leaflet/dist/leaflet.css';
@@ -19,19 +19,17 @@ const currentCustomIcon = new Icon({
 
 type MapProps = {
   section: string;
-  city: City;
   offerCardDataList: OfferDataType[];
   selectedPoint: OfferDataType | undefined;
 }
 
 function Map({
   section,
-  city,
   offerCardDataList,
   selectedPoint
 }: MapProps): JSX.Element {
-
   const className = section === Section.OTHER ? 'offer' : 'cities';
+  const city = offerCardDataList[0].city;
 
   const mapRef = useRef(null);
   const map = useMap(mapRef, city);
