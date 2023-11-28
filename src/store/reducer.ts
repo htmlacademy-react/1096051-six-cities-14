@@ -1,5 +1,5 @@
 import { createReducer } from '@reduxjs/toolkit';
-import { changeCity, changeCurrentSort, changePagePath, loadComments, loadCurrentOffer, loadFavoriteOffers, loadOffers, requireAuthorization, setOffersDataLoadingStatus, updateUserdata } from './action';
+import { changeCity, changeCurrentSort, changeOfferDataInList, changePagePath, loadComments, loadCurrentOffer, loadFavoriteOffers, loadOffers, requireAuthorization, setOffersDataLoadingStatus, updateUserdata } from './action';
 import { AuthorizationStatus, CityNames, PagePaths, SortNames } from '../const';
 import { UniversalType } from '../types/universal-type';
 import { SortNamesType } from '../types/sort-names-type';
@@ -72,5 +72,8 @@ export const reducer = createReducer(initialState, (builder) => {
     })
     .addCase(loadComments, (state, action) => {
       state.commentList = action.payload;
+    })
+    .addCase(changeOfferDataInList, (state, action) => {
+      state.offersList = state.offersList.map((offer) => action.payload.id === offer.id ? action.payload : offer);
     });
 });

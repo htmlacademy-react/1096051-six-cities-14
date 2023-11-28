@@ -15,6 +15,10 @@ export const loadOffers = createAction('data/loadOffers', (offersData: OfferData
   payload: offersData
 }));
 
+export const changeOfferDataInList = createAction('data/changeofferDataInList', (offerData: OfferDataType) => ({
+  payload: offerData
+}));
+
 export const loadFavoriteOffers = createAction('data/loadFavoriteOffers', (favoriteOffersData: OfferDataType[]) => ({
   payload: favoriteOffersData
 }));
