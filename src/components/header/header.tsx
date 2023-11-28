@@ -1,45 +1,46 @@
 import { Link } from 'react-router-dom';
-import { UserType } from '../../types/user-type';
 import { AuthorizationStatus, PagePaths } from '../../const';
+import { useAppDispatch, useAppSelector } from '../../hooks';
+import { logoutAction } from '../../store/api-actions';
+import { changePagePath } from '../../store/action';
 
-type HeaderProps = {
-  user: UserType;
-  handlePagePath: (path: string) => void;
-  authStatus: string;
-}
 
-function Header({ user, handlePagePath, authStatus }: HeaderProps): JSX.Element {
-  const {
-    avatarUrl,
-    name
-  } = user;
+function Header(): JSX.Element {
+  const dispatch = useAppDispatch();
+  const user = useAppSelector((state) => state.userData);
+  const countFavoriteOffers = useAppSelector((state) => state.favoriteOffersList).length;
+  const authorizationStatus = useAppSelector((state) => state.authorizationStatus);
 
   return (
     <header className="header">
       <div className="container">
         <div className="header__wrapper">
           <div className="header__left">
-            <Link onClick={() => handlePagePath(PagePaths.MAIN)} className="header__logo-link header__logo-link--active" to={PagePaths.MAIN}>
+            <Link className="header__logo-link header__logo-link--active" to={PagePaths.MAIN}>
               <img className="header__logo" src="img/logo.svg" alt="6 cities logo" width="81" height="41" />
             </Link>
           </div>
           <nav className="header__nav">
             <ul className="header__nav-list">
               <li className="header__nav-item user">
-                {authStatus === AuthorizationStatus.Auth ?
-                  <Link onClick={() => handlePagePath(PagePaths.FAVORITES)} className="header__nav-link header__nav-link--profile" to={PagePaths.FAVORITES}>
-                    <div className="header__avatar-wrapper user__avatar-wrapper" style={{ backgroundImage: `url(${avatarUrl})` }}>
+                {authorizationStatus === AuthorizationStatus.Auth && user !== null ?
+                  <Link className="header__nav-link header__nav-link--profile" to={PagePaths.FAVORITES}>
+                    <div className="header__avatar-wrapper user__avatar-wrapper" style={{ backgroundImage: `url(${user ? user.avatarUrl : ''})` }}>
                     </div>
-                    <span className="header__user-name user__name">{name}</span>
-                    <span className="header__favorite-count">3</span>
+                    <span className="header__user-name user__name">{user ? user.name : ''}</span>
+                    <span className="header__favorite-count">{countFavoriteOffers}</span>
                   </Link>
                   :
-                  <Link onClick={() => handlePagePath(PagePaths.LOGIN)} className="header__nav-link header__nav-link--profile" to={PagePaths.LOGIN}>
+                  <Link onClick={() => dispatch(changePagePath(PagePaths.LOGIN))} className="header__nav-link header__nav-link--profile" to={PagePaths.LOGIN}>
                     <span className="header__user-name user__name">{'Sign in'}</span>
                   </Link>}
               </li>
               <li className="header__nav-item">
-                <Link onClick={() => handlePagePath(PagePaths.MAIN)} className="header__nav-link" to={PagePaths.MAIN}>
+                <Link onClick={() => {
+                  dispatch(changePagePath(PagePaths.MAIN));
+                  dispatch(logoutAction());
+                }} className="header__nav-link" to={PagePaths.MAIN}
+                >
                   <span className="header__signout">Sign out</span>
                 </Link>
               </li>

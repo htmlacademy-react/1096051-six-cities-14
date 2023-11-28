@@ -1,8 +1,8 @@
-import { CardData } from './card-data-type';
+import { OfferDataType } from './offer-data-type';
 
 export type FavoriteItemDataType = {
   cityName: string;
-  dataList: CardData[];
+  dataList: OfferDataType[];
 }
 
 export type FavoriteCardListType = (FavoriteItemDataType & {

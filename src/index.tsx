@@ -1,16 +1,14 @@
 import React from 'react';
 import ReactDOM from 'react-dom/client';
 import App from './components/app/app';
-import { AuthorizationStatus } from './const';
-import { getCommentDataList } from './mock/comment';
-import { getUserData } from './mock/user';
-import { CITY } from './mock/city';
 import { Provider } from 'react-redux';
 import { store } from './store';
-import ErrorMessage from './components/error-message/error-message';
-import { checkAuthAction, fetchOfferAction } from './store/api-actions';
+import { checkAuthAction, fetchFavoriteOffer, fetchOfferAction } from './store/api-actions';
+import { ToastContainer } from 'react-toastify';
+import 'react-toastify/dist/ReactToastify.css';
 
 store.dispatch(fetchOfferAction());
+store.dispatch(fetchFavoriteOffer());
 store.dispatch(checkAuthAction());
 
 const root = ReactDOM.createRoot(
@@ -20,13 +18,8 @@ const root = ReactDOM.createRoot(
 root.render(
   <React.StrictMode>
     <Provider store={store}>
-      <ErrorMessage />
-      <App
-        city={CITY}
-        commentDataList={getCommentDataList()}
-        user={getUserData()}
-        authStatus={AuthorizationStatus.Auth}
-      />
+      <ToastContainer />
+      <App />
     </Provider>
   </React.StrictMode>
 );

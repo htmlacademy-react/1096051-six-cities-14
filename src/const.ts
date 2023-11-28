@@ -5,7 +5,6 @@ import { AuthorizationStatus } from './types/authorization-status-type';
 
 const COUNT_COMMENTS: number = 5;
 const MAX_RATING = 5;
-const TIMEOUT_SHOW_ERROR = 2000;
 
 const StarsRate = [
   {
@@ -102,8 +101,9 @@ const AuthorizationStatus: AuthorizationStatus = {
   Unknown: 'Unknown',
 };
 
-export const APIRoute = {
+const APIRoute = {
   Offers: '/offers',
+  Comments: '/comments',
   Favorite: '/favorite',
   Login: '/login',
   Logout: '/logout'
@@ -124,5 +124,5 @@ export {
   MAX_RATING,
   PagePaths,
   AuthorizationStatus,
-  TIMEOUT_SHOW_ERROR
+  APIRoute,
 };

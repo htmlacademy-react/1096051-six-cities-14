@@ -1,14 +1,8 @@
 import { Outlet } from 'react-router-dom';
 import Header from '../../components/header/header';
-import { UserType } from '../../types/user-type';
 import { PagePaths } from '../../const';
 import Footer from '../../components/footer/footer';
-import { useState } from 'react';
-
-type LayoutProps = {
-  user: UserType;
-  authStatus: string;
-}
+import { useAppSelector } from '../../hooks';
 
 function getPageClassName(currentPage: string): string | undefined {
   switch (currentPage) {
@@ -21,18 +15,14 @@ function getPageClassName(currentPage: string): string | undefined {
   }
 }
 
-function Layout({ user, authStatus }: LayoutProps): JSX.Element {
-  const [pagePath, setPagePath] = useState(PagePaths.MAIN);
-
-  function handlePagePath(path: string): void {
-    setPagePath(path);
-  }
+function Layout(): JSX.Element {
+  const currentPagePath = useAppSelector((state) => state.currentPagePath);
 
   return (
-    <div className={`page ${getPageClassName(pagePath)}`}>
-      <Header user={user} handlePagePath={handlePagePath} authStatus={authStatus}/>
+    <div className={`page ${getPageClassName(currentPagePath)}`}>
+      <Header />
       <Outlet />
-      {pagePath !== PagePaths.MAIN && <Footer handlePagePath={handlePagePath} />}
+      {currentPagePath !== PagePaths.MAIN && <Footer />}
     </div>
   );
 }

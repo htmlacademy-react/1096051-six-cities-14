@@ -1,26 +1,26 @@
 import { useAppSelector } from '../../hooks';
-import { CardData } from '../../types/card-data-type';
+import { OfferDataType } from '../../types/offer-data-type';
 import { SortNamesType } from '../../types/sort-names-type';
 import CityCard from '../city-card/city-card';
 
 type CityListProps = {
-  dataList: CardData[];
+  dataList: OfferDataType[];
   section: string;
   onListItemHover: (listItemName: string) => void;
 }
 
 type SortDataListProps = {
-  dataList: CardData[];
+  dataList: OfferDataType[];
   currentSort: string;
   sortNames: SortNamesType;
 }
 
-function sortByPrice(dataList: CardData[], isHighToLow: boolean): CardData[] {
+function sortByPrice(dataList: OfferDataType[], isHighToLow: boolean): OfferDataType[] {
   const newDataList = [...dataList].sort((a, b) => isHighToLow ? b.price - a.price : a.price - b.price);
   return newDataList;
 }
 
-function sortDataList({ dataList, currentSort, sortNames }: SortDataListProps): CardData[] {
+function sortDataList({ dataList, currentSort, sortNames }: SortDataListProps): OfferDataType[] {
   switch (currentSort) {
     case sortNames.Popular.name:
       return dataList;

@@ -3,22 +3,20 @@ import LocationsList from '../../components/locations/locations';
 import Map from '../../components/map/map';
 import Sort from '../../components/sort/sort';
 import { Section } from '../../const';
-import { City, OfferDataType } from '../../types/offer-data-type';
+import { OfferDataType } from '../../types/offer-data-type';
 import CityList from '../../components/city-list/city-list';
 import { useAppSelector } from '../../hooks';
 
 type SixCitiesScreenProps = {
   onListItemHover: (listItemName: string) => void;
-  city: City;
   selectedPoint: OfferDataType | undefined;
 };
 
 
 function SixCitiesScreen({
   onListItemHover,
-  selectedPoint,
-  city }: SixCitiesScreenProps): JSX.Element {
-  const offerDataList = useAppSelector((state) => state.rentList);
+  selectedPoint }: SixCitiesScreenProps): JSX.Element {
+  const offerDataList = useAppSelector((state) => state.offersList);
   const currentCityNamer = useAppSelector((state) => state.currentCityName);
 
   return (
@@ -41,7 +39,7 @@ function SixCitiesScreen({
             </div>
           </section>
           <div className="cities__right-section">
-            <Map selectedPoint={selectedPoint} city={city} offerCardDataList={offerDataList} section={Section.DEFAULT} />
+            <Map selectedPoint={selectedPoint} offerCardDataList={offerDataList} section={Section.DEFAULT} />
           </div>
         </div>
       </div>

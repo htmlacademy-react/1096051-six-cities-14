@@ -1,4 +1,4 @@
-import { Navigate, useParams } from 'react-router-dom';
+import { Navigate } from 'react-router-dom';
 import Bookmark from '../../components/bookmark/bookmark';
 import Features from '../../components/features/features';
 import Gallery from '../../components/gallery/gallery';
@@ -7,26 +7,22 @@ import Map from '../../components/map/map';
 import OfferGoods from '../../components/offer-goods/offer-goods';
 import Review from '../../components/review/review';
 import { PagePaths, Section } from '../../const';
-import { CommentDataType } from '../../types/comment-data-type';
-import { City, OfferDataType } from '../../types/offer-data-type';
+import { OfferDataType } from '../../types/offer-data-type';
 import { getWidthRatingProperty } from '../../utils/util';
 import { Helmet } from 'react-helmet-async';
 import CityList from '../../components/city-list/city-list';
 import { useEffect } from 'react';
+import { useAppSelector } from '../../hooks';
 
 type OfferScreenProps = {
   offerCardDataList: OfferDataType[];
-  commentDataList: CommentDataType[];
   handleListItemHover: (listItemName: string) => void;
-  city: City;
   selectedPoint: OfferDataType | undefined;
 }
 
 function OfferScreen({
   offerCardDataList,
-  commentDataList,
   handleListItemHover,
-  city,
   selectedPoint
 }: OfferScreenProps): JSX.Element {
   const currentLocation = window.location.href;
@@ -35,11 +31,11 @@ function OfferScreen({
     window.scrollTo(0, 0);
   }, [currentLocation]);
 
-  const paramID = useParams().id;
-  const offerData = offerCardDataList.find(({ id }) => id === paramID);
+  const offerData = useAppSelector((state) => state.currentOffer);
 
   if (offerData) {
     const {
+      id,
       host,
       description,
       goods,
@@ -69,7 +65,7 @@ function OfferScreen({
                 <h1 className="offer__name">
                   {title}
                 </h1>
-                <Bookmark isFavorite={isFavorite} section={Section.OFFER} />
+                <Bookmark offerID={id} isFavorite={isFavorite} section={Section.OFFER} />
               </div>
               <div className="offer__rating rating">
                 <div className="offer__stars rating__stars">
@@ -85,10 +81,10 @@ function OfferScreen({
               </div>
               <OfferGoods goods={goods} />
               <Host host={host} description={description} />
-              <Review commentDataList={commentDataList} />
+              <Review />
             </div>
           </div>
-          <Map city={city} selectedPoint={selectedPoint} offerCardDataList={offerCardDataList} section={Section.OTHER} />
+          <Map selectedPoint={selectedPoint} offerCardDataList={offerCardDataList} section={Section.OTHER} />
         </section>
         <div className="container">
           <section className="near-places places">
