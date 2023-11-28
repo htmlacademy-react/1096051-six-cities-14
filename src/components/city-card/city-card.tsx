@@ -9,7 +9,7 @@ import { fetchCommentAction, fetchOfferByIdAction } from '../../store/api-action
 type CitiesCardProps = {
   section: string;
   data: CardData;
-  onListItemHover: (evt: React.MouseEvent<HTMLElement>, listItemName: string) => void;
+  onListItemHover: (evt: React.MouseEvent<HTMLElement>, offerID: string) => void;
 };
 
 function CityCard({ data, section = Section.DEFAULT, onListItemHover }: CitiesCardProps): JSX.Element {
@@ -42,7 +42,7 @@ function CityCard({ data, section = Section.DEFAULT, onListItemHover }: CitiesCa
 
   return (
     <article onMouseEnter={(event) => {
-      onListItemHover(event, title);
+      onListItemHover(event, id);
       setIsActive(true);
     }} onMouseOut={() => setIsActive(false)} className={`${containerClassName}__card place-card`}
     >

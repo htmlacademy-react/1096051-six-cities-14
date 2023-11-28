@@ -29,10 +29,9 @@ function App(): JSX.Element {
     );
   }
 
-  const handleListItemHover = (listItemName: string) => {
+  const handleListItemHover = (offerID: string) => {
     const currentPoint = offerCardList
-      .find(({ title }) => title === listItemName);
-
+      .find(({ id }) => id === offerID);
     setSelectedPoint(currentPoint);
   };
 

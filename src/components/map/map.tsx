@@ -37,7 +37,8 @@ function Map({
   useEffect(() => {
     if (map) {
       const markerLayer = layerGroup().addTo(map);
-      offerCardDataList.forEach(({ city: point, title }) => {
+      offerCardDataList.forEach((offer) => {
+        const { city: point, id } = offer;
         const marker = new Marker({
           lat: point.location.latitude,
           lng: point.location.longitude
@@ -45,7 +46,7 @@ function Map({
 
         marker
           .setIcon(
-            selectedPoint !== undefined && title === selectedPoint.title
+            selectedPoint !== undefined && id === selectedPoint.id
               ? currentCustomIcon
               : defaultCustomIcon
           )
@@ -59,7 +60,7 @@ function Map({
   }, [map, offerCardDataList, selectedPoint]);
 
   return (
-    <section className={`${className}__map map`} style={{'height': '500px'}} ref={mapRef}>
+    <section className={`${className}__map map`} style={{ 'height': '500px' }} ref={mapRef}>
     </section>
   );
 }
