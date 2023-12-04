@@ -16,7 +16,7 @@ type SixCitiesScreenProps = {
 function SixCitiesScreen({
   onListItemHover,
   selectedPoint }: SixCitiesScreenProps): JSX.Element {
-  const offerDataList = useAppSelector((state) => state.offersList);
+  const filteredOffersList = useAppSelector((state) => state.filteredOffersList);
   const currentCityNamer = useAppSelector((state) => state.currentCityName);
 
   return (
@@ -32,14 +32,14 @@ function SixCitiesScreen({
         <div className="cities__places-container container">
           <section className="cities__places places">
             <h2 className="visually-hidden">Places</h2>
-            <b className="places__found">{offerDataList.length} places to stay in {currentCityNamer}</b>
+            <b className="places__found">{filteredOffersList.length} places to stay in {currentCityNamer}</b>
             <Sort />
             <div className="cities__places-list places__list tabs__content">
-              <CityList onListItemHover={onListItemHover} dataList={offerDataList} section={Section.DEFAULT}></CityList>
+              <CityList onListItemHover={onListItemHover} dataList={filteredOffersList} section={Section.DEFAULT}></CityList>
             </div>
           </section>
           <div className="cities__right-section">
-            <Map selectedPoint={selectedPoint} offerCardDataList={offerDataList} section={Section.DEFAULT} />
+            <Map selectedPoint={selectedPoint} offerCardDataList={filteredOffersList} section={Section.DEFAULT} />
           </div>
         </div>
       </div>

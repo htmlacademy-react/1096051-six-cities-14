@@ -13,6 +13,7 @@ const DEFAULT_SORT = 'Popular';
 type InitialState = {
   currentCityName: string;
   offersList: OfferDataType[];
+  filteredOffersList: OfferDataType[];
   favoriteOffersList: OfferDataType[];
   commentList: CommentDataType[];
   cityNames: UniversalType[];
@@ -26,11 +27,12 @@ type InitialState = {
 }
 
 const initialState: InitialState = {
-  currentCityName: DEFAULT_CITY_NAME,
   offersList: [],
+  filteredOffersList: [],
   favoriteOffersList: [],
   commentList: [],
   cityNames: CityNames,
+  currentCityName: DEFAULT_CITY_NAME,
   currentSort: DEFAULT_SORT,
   sortNames: SortNames,
   authorizationStatus: AuthorizationStatus.Unknown,
@@ -41,16 +43,22 @@ const initialState: InitialState = {
 };
 
 
+function getFilteredOffersByCity (offersList: OfferDataType[], cityName: string): OfferDataType[] {
+  return offersList.filter((item) => item.city.name === cityName);
+}
+
 export const reducer = createReducer(initialState, (builder) => {
   builder
     .addCase(changeCity, (state, action) => {
       state.currentCityName = action.payload;
+      state.filteredOffersList = getFilteredOffersByCity(state.offersList, state.currentCityName);
     })
     .addCase(changeCurrentSort, (state, action) => {
       state.currentSort = action.payload;
     })
     .addCase(loadOffers, (state, action) => {
       state.offersList = action.payload;
+      state.filteredOffersList = getFilteredOffersByCity(state.offersList, state.currentCityName);
     })
     .addCase(loadFavoriteOffers, (state, action) => {
       state.favoriteOffersList = action.payload;
