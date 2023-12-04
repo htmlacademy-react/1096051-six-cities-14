@@ -58,7 +58,6 @@ function App(): JSX.Element {
             <Route path={`${PagePaths.OFFER}/:id`} element={
               <OfferScreen
                 handleListItemHover={handleListItemHover}
-                offerCardDataList={offerCardList}
                 selectedPoint={selectedPoint}
               />
             }
