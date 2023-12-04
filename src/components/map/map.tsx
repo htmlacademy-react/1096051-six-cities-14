@@ -30,18 +30,18 @@ function Map({
 }: MapProps): JSX.Element {
   const className = section === Section.OTHER ? 'offer' : 'cities';
   const city = offerCardDataList[0].city;
-
   const mapRef = useRef(null);
+
   const map = useMap(mapRef, city);
 
   useEffect(() => {
     if (map) {
       const markerLayer = layerGroup().addTo(map);
       offerCardDataList.forEach((offer) => {
-        const { city: point, id } = offer;
+        const { location, id } = offer;
         const marker = new Marker({
-          lat: point.location.latitude,
-          lng: point.location.longitude
+          lat: location.latitude,
+          lng: location.longitude
         });
 
         marker

@@ -83,5 +83,6 @@ export const reducer = createReducer(initialState, (builder) => {
     })
     .addCase(changeOfferDataInList, (state, action) => {
       state.offersList = state.offersList.map((offer) => action.payload.id === offer.id ? action.payload : offer);
+      state.filteredOffersList = getFilteredOffersByCity(state.offersList, state.currentCityName);
     });
 });

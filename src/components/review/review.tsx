@@ -1,3 +1,4 @@
+import { AuthorizationStatus } from '../../const';
 import { useAppSelector } from '../../hooks';
 import { CommentDataType } from '../../types/comment-data-type';
 import { getWidthRatingProperty } from '../../utils/util';
@@ -49,6 +50,7 @@ function Comment({ commentData }: CommentProps): JSX.Element {
 
 function Review(): JSX.Element {
   const commentDataList = useAppSelector((state) => state.commentList);
+  const authorizationStatus = useAppSelector((state) => state.authorizationStatus);
 
   return (
     <section className="offer__reviews reviews">
@@ -56,7 +58,10 @@ function Review(): JSX.Element {
       <ul className="reviews__list">
         {commentDataList.map((data) => <Comment commentData={data} key={data.id} />)}
       </ul>
-      <ReviewForm />
+      {authorizationStatus === AuthorizationStatus.Auth ?
+        <ReviewForm />
+        :
+        ''}
     </section>
   );
 }
