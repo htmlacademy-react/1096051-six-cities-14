@@ -7,6 +7,8 @@ type LocationItemProps = UniversalType
 
 function LocationItem({ name, id }: LocationItemProps): JSX.Element {
   const dispatch = useAppDispatch();
+  const currentCityFilter = useAppSelector((state) => state.currentCityName);
+
 
   return (
     <li className="locations__item">
@@ -15,7 +17,7 @@ function LocationItem({ name, id }: LocationItemProps): JSX.Element {
           dispatch(changeCity(name));
           // dispatch(renderRentList()); to do
         }
-      } className="locations__item-link tabs__item" id={id} to="#"
+      } className={`locations__item-link tabs__item${currentCityFilter === name ? '--active' : ''}`} id={id} to="#"
       >
         <span>{name}</span>
       </Link>

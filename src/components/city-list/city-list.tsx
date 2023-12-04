@@ -45,9 +45,9 @@ function CityList({
 
   const sortedDataList = sortDataList({ dataList, currentSort, sortNames });
 
-  const handleListItemHover = (event: React.MouseEvent<HTMLElement>, listItemName: string) => {
+  const handleListItemHover = (event: React.MouseEvent<HTMLElement>, offerID: string) => {
     event.preventDefault();
-    onListItemHover(listItemName);
+    onListItemHover(offerID);
   };
 
   return (

@@ -15,12 +15,16 @@ export const loadOffers = createAction('data/loadOffers', (offersData: OfferData
   payload: offersData
 }));
 
+export const changeOfferDataInList = createAction('data/changeofferDataInList', (offerData: OfferDataType) => ({
+  payload: offerData
+}));
+
 export const loadFavoriteOffers = createAction('data/loadFavoriteOffers', (favoriteOffersData: OfferDataType[]) => ({
   payload: favoriteOffersData
 }));
 
-export const loadCurrentOffer = createAction('data/loadCurrentOffer', (offerData: OfferDataType) => ({
-  payload: offerData
+export const loadCurrentOffer = createAction('data/loadCurrentOffer', (offerData: OfferDataType, offersDataNearby: OfferDataType[]) => ({
+  payload: {offerData, offersDataNearby}
 }));
 
 export const requireAuthorization = createAction('user/requireAuthorization', (authorizationStatus: string) => ({

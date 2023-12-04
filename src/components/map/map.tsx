@@ -30,22 +30,23 @@ function Map({
 }: MapProps): JSX.Element {
   const className = section === Section.OTHER ? 'offer' : 'cities';
   const city = offerCardDataList[0].city;
-
   const mapRef = useRef(null);
+
   const map = useMap(mapRef, city);
 
   useEffect(() => {
     if (map) {
       const markerLayer = layerGroup().addTo(map);
-      offerCardDataList.forEach(({ city: point, title }) => {
+      offerCardDataList.forEach((offer) => {
+        const { location, id } = offer;
         const marker = new Marker({
-          lat: point.location.latitude,
-          lng: point.location.longitude
+          lat: location.latitude,
+          lng: location.longitude
         });
 
         marker
           .setIcon(
-            selectedPoint !== undefined && title === selectedPoint.title
+            selectedPoint !== undefined && id === selectedPoint.id
               ? currentCustomIcon
               : defaultCustomIcon
           )
@@ -59,7 +60,7 @@ function Map({
   }, [map, offerCardDataList, selectedPoint]);
 
   return (
-    <section className={`${className}__map map`} style={{'height': '500px'}} ref={mapRef}>
+    <section className={`${className}__map map`} style={{ 'height': '500px' }} ref={mapRef}>
     </section>
   );
 }

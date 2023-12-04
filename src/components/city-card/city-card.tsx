@@ -1,19 +1,20 @@
-import { Section } from '../../const';
+import { AuthorizationStatus, Section } from '../../const';
 import { getWidthRatingProperty } from '../../utils/util';
 import Bookmark from '../bookmark/bookmark';
 import { useState } from 'react';
 import { CardData } from '../../types/card-data-type';
-import { useAppDispatch } from '../../hooks';
+import { useAppDispatch, useAppSelector } from '../../hooks';
 import { fetchCommentAction, fetchOfferByIdAction } from '../../store/api-actions';
 
 type CitiesCardProps = {
   section: string;
   data: CardData;
-  onListItemHover: (evt: React.MouseEvent<HTMLElement>, listItemName: string) => void;
+  onListItemHover: (evt: React.MouseEvent<HTMLElement>, offerID: string) => void;
 };
 
 function CityCard({ data, section = Section.DEFAULT, onListItemHover }: CitiesCardProps): JSX.Element {
   const dispatch = useAppDispatch();
+  const authorizationStatus = useAppSelector((state) => state.authorizationStatus);
 
   const {
     isPremium,
@@ -42,7 +43,7 @@ function CityCard({ data, section = Section.DEFAULT, onListItemHover }: CitiesCa
 
   return (
     <article onMouseEnter={(event) => {
-      onListItemHover(event, title);
+      onListItemHover(event, id);
       setIsActive(true);
     }} onMouseOut={() => setIsActive(false)} className={`${containerClassName}__card place-card`}
     >
@@ -67,7 +68,10 @@ function CityCard({ data, section = Section.DEFAULT, onListItemHover }: CitiesCa
             <b className="place-card__price-value">&euro;{price}</b>
             <span className="place-card__price-text">&#47;&nbsp;night</span>
           </div>
-          <Bookmark offerID={id} isFavorite={isFavorite} section={Section.DEFAULT} />
+          {authorizationStatus === AuthorizationStatus.Auth ?
+            <Bookmark offerID={id} isFavorite={isFavorite} section={Section.DEFAULT} />
+            :
+            ''}
         </div>
         <div className="place-card__rating rating">
           <div className="place-card__stars rating__stars">

@@ -3,7 +3,7 @@ import { AppDispatch, State } from '../types/state-type';
 import { AxiosInstance } from 'axios';
 import { OfferDataType } from '../types/offer-data-type';
 import { APIRoute, AuthorizationStatus, PagePaths } from '../const';
-import { loadComments, loadCurrentOffer, loadFavoriteOffers, loadOffers, redirectToRoute, requireAuthorization, setOffersDataLoadingStatus, updateUserdata } from './action';
+import { changeOfferDataInList, loadComments, loadCurrentOffer, loadFavoriteOffers, loadOffers, redirectToRoute, requireAuthorization, setOffersDataLoadingStatus, updateUserdata } from './action';
 import { AuthData } from '../types/auth-data-type';
 import { UserType } from '../types/user-type';
 import { dropToken, saveToken } from '../services/token';
@@ -33,9 +33,10 @@ export const fetchOfferByIdAction = createAsyncThunk<void, string | undefined, {
   async (id, {dispatch, extra: api}) => {
     const route = `${APIRoute.Offers}/${id}`;
     dispatch(setOffersDataLoadingStatus(true));
-    const {data} = await api.get<OfferDataType>(route);
+    const {data: offerData} = await api.get<OfferDataType>(route);
+    const {data: offersNearby} = await api.get<OfferDataType[]>(`${route}/nearby`);
     dispatch(setOffersDataLoadingStatus(false));
-    dispatch(loadCurrentOffer(data));
+    dispatch(loadCurrentOffer(offerData, offersNearby));
     dispatch(redirectToRoute(`${PagePaths.OFFER}/${id}`));
   }
 );
@@ -73,8 +74,9 @@ export const changeOfferFavoriteStatus = createAsyncThunk <void, FavoriteStatus,
   'user/changeFavoriteOfferStatus',
   async ({offerID, status}, {dispatch, extra: api}) => {
     const route = `${APIRoute.Favorite}/${offerID}/${status}`;
-    await api.post<OfferDataType>(route);
+    const {data} = await api.post<OfferDataType>(route);
     dispatch(fetchFavoriteOffer());
+    dispatch(changeOfferDataInList(data));
   }
 );
 
