@@ -23,8 +23,8 @@ export const loadFavoriteOffers = createAction('data/loadFavoriteOffers', (favor
   payload: favoriteOffersData
 }));
 
-export const loadCurrentOffer = createAction('data/loadCurrentOffer', (offerData: OfferDataType) => ({
-  payload: offerData
+export const loadCurrentOffer = createAction('data/loadCurrentOffer', (offerData: OfferDataType, offersDataNearby: OfferDataType[]) => ({
+  payload: {offerData, offersDataNearby}
 }));
 
 export const requireAuthorization = createAction('user/requireAuthorization', (authorizationStatus: string) => ({

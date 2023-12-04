@@ -15,6 +15,7 @@ type InitialState = {
   offersList: OfferDataType[];
   filteredOffersList: OfferDataType[];
   favoriteOffersList: OfferDataType[];
+  offersNearby: OfferDataType[];
   commentList: CommentDataType[];
   cityNames: UniversalType[];
   currentSort: string;
@@ -31,6 +32,7 @@ const initialState: InitialState = {
   filteredOffersList: [],
   favoriteOffersList: [],
   commentList: [],
+  offersNearby: [],
   cityNames: CityNames,
   currentCityName: DEFAULT_CITY_NAME,
   currentSort: DEFAULT_SORT,
@@ -73,7 +75,8 @@ export const reducer = createReducer(initialState, (builder) => {
       state.currentPagePath = action.payload;
     })
     .addCase(loadCurrentOffer, (state, action) => {
-      state.currentOffer = action.payload;
+      state.currentOffer = action.payload.offerData;
+      state.offersNearby = action.payload.offersDataNearby;
     })
     .addCase(updateUserdata, (state, action) => {
       state.userData = action.payload;
@@ -84,5 +87,6 @@ export const reducer = createReducer(initialState, (builder) => {
     .addCase(changeOfferDataInList, (state, action) => {
       state.offersList = state.offersList.map((offer) => action.payload.id === offer.id ? action.payload : offer);
       state.filteredOffersList = getFilteredOffersByCity(state.offersList, state.currentCityName);
+      state.offersNearby = state.offersNearby.map((offer) => action.payload.id === offer.id ? action.payload : offer);
     });
 });

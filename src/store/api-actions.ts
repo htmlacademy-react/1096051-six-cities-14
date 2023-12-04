@@ -33,9 +33,10 @@ export const fetchOfferByIdAction = createAsyncThunk<void, string | undefined, {
   async (id, {dispatch, extra: api}) => {
     const route = `${APIRoute.Offers}/${id}`;
     dispatch(setOffersDataLoadingStatus(true));
-    const {data} = await api.get<OfferDataType>(route);
+    const {data: offerData} = await api.get<OfferDataType>(route);
+    const {data: offersNearby} = await api.get<OfferDataType[]>(`${route}/nearby`);
     dispatch(setOffersDataLoadingStatus(false));
-    dispatch(loadCurrentOffer(data));
+    dispatch(loadCurrentOffer(offerData, offersNearby));
     dispatch(redirectToRoute(`${PagePaths.OFFER}/${id}`));
   }
 );

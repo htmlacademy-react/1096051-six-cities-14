@@ -15,13 +15,11 @@ import { useEffect } from 'react';
 import { useAppSelector } from '../../hooks';
 
 type OfferScreenProps = {
-  offerCardDataList: OfferDataType[];
   handleListItemHover: (listItemName: string) => void;
   selectedPoint: OfferDataType | undefined;
 }
 
 function OfferScreen({
-  offerCardDataList,
   handleListItemHover,
   selectedPoint
 }: OfferScreenProps): JSX.Element {
@@ -32,6 +30,8 @@ function OfferScreen({
   }, [currentLocation]);
 
   const offerData = useAppSelector((state) => state.currentOffer);
+  const offersNearby = useAppSelector((state) => state.offersNearby);
+  const markOffersList: OfferDataType[] = [offerData ? offerData : offersNearby[4], ...offersNearby.slice(0, 3)];
 
   if (offerData) {
     const {
@@ -84,13 +84,13 @@ function OfferScreen({
               <Review />
             </div>
           </div>
-          <Map selectedPoint={selectedPoint} offerCardDataList={offerCardDataList} section={Section.OTHER} />
+          <Map selectedPoint={selectedPoint} offerCardDataList={markOffersList} section={Section.OTHER} />
         </section>
         <div className="container">
           <section className="near-places places">
             <h2 className="near-places__title">Other places in the neighbourhood</h2>
             <div className="near-places__list places__list">
-              <CityList onListItemHover={handleListItemHover} dataList={offerCardDataList} section={Section.OTHER}></CityList>
+              <CityList onListItemHover={handleListItemHover} dataList={offersNearby} section={Section.OTHER}></CityList>
             </div>
           </section>
         </div>
