@@ -35,15 +35,18 @@ function Header(): JSX.Element {
                     <span className="header__user-name user__name">{'Sign in'}</span>
                   </Link>}
               </li>
-              <li className="header__nav-item">
-                <Link onClick={() => {
-                  dispatch(changePagePath(PagePaths.MAIN));
-                  dispatch(logoutAction());
-                }} className="header__nav-link" to={PagePaths.MAIN}
-                >
-                  <span className="header__signout">Sign out</span>
-                </Link>
-              </li>
+              {authorizationStatus === AuthorizationStatus.Auth && user !== null ?
+                <li className="header__nav-item">
+                  <Link onClick={() => {
+                    dispatch(changePagePath(PagePaths.MAIN));
+                    dispatch(logoutAction());
+                  }} className="header__nav-link" to={PagePaths.MAIN}
+                  >
+                    <span className="header__signout">Sign out</span>
+                  </Link>
+                </li>
+                :
+                ''}
             </ul>
           </nav>
         </div>
