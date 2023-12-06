@@ -1,21 +1,21 @@
 import { Link } from 'react-router-dom';
 import { useAppDispatch, useAppSelector } from '../../hooks';
 import { UniversalType } from '../../types/universal-type';
-import { changeCity } from '../../store/action';
+import { getCityNames, getCurrentCityName } from '../../store/app-data/app-data.selector';
+import { changeCity } from '../../store/app-data/app-data';
 
 type LocationItemProps = UniversalType
 
 function LocationItem({ name, id }: LocationItemProps): JSX.Element {
   const dispatch = useAppDispatch();
-  const currentCityFilter = useAppSelector((state) => state.currentCityName);
+  const currentCityFilter = useAppSelector(getCurrentCityName);
 
 
   return (
     <li className="locations__item">
       <Link onClick={
         () => {
-          dispatch(changeCity(name));
-          // dispatch(renderRentList()); to do
+          dispatch(changeCity({cityName: name}));
         }
       } className={`locations__item-link tabs__item${currentCityFilter === name ? '--active' : ''}`} id={id} to="#"
       >
@@ -26,7 +26,7 @@ function LocationItem({ name, id }: LocationItemProps): JSX.Element {
 }
 
 function LocationsList(): JSX.Element {
-  const cityNames = useAppSelector((state) => state.cityNames);
+  const cityNames = useAppSelector(getCityNames);
   const locationItemsElements = cityNames.map(({ name, id }) => (
     <LocationItem name={name} id={id} key={id} />
   ));

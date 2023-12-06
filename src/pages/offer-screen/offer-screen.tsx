@@ -13,6 +13,7 @@ import { Helmet } from 'react-helmet-async';
 import CityList from '../../components/city-list/city-list';
 import { useEffect } from 'react';
 import { useAppSelector } from '../../hooks';
+import { getCurrentOffer, getOffersNearby } from '../../store/app-data/app-data.selector';
 
 type OfferScreenProps = {
   handleListItemHover: (listItemName: string) => void;
@@ -29,8 +30,8 @@ function OfferScreen({
     window.scrollTo(0, 0);
   }, [currentLocation]);
 
-  const offerData = useAppSelector((state) => state.currentOffer);
-  const offersNearby = useAppSelector((state) => state.offersNearby);
+  const offerData = useAppSelector(getCurrentOffer);
+  const offersNearby = useAppSelector(getOffersNearby);
   const markOffersList: OfferDataType[] = [offerData ? offerData : offersNearby[4], ...offersNearby.slice(0, 3)];
 
   if (offerData) {

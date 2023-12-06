@@ -4,8 +4,8 @@ import { Link } from 'react-router-dom';
 import { useAppDispatch } from '../../hooks';
 import { AuthData } from '../../types/auth-data-type';
 import { loginAction } from '../../store/api-actions';
-import { changePagePath } from '../../store/action';
 import { PagePaths } from '../../const';
+import { changePagePath } from '../../store/app-service/app-service';
 
 function LoginScreen(): JSX.Element {
   const emailRef = useRef<HTMLInputElement | null>(null);
@@ -15,7 +15,7 @@ function LoginScreen(): JSX.Element {
 
   const onSubmit = (authData: AuthData) => {
     dispatch(loginAction(authData));
-    dispatch(changePagePath(PagePaths.MAIN));
+    dispatch(changePagePath({ pagePath: PagePaths.MAIN }));
   };
 
   const handleSubmit = (evt: React.FormEvent<HTMLFormElement>) => {

@@ -5,6 +5,7 @@ import { useState } from 'react';
 import { CardData } from '../../types/card-data-type';
 import { useAppDispatch, useAppSelector } from '../../hooks';
 import { fetchCommentAction, fetchOfferByIdAction } from '../../store/api-actions';
+import { getAuthorizationStatus } from '../../store/user-process/user-process.selector';
 
 type CitiesCardProps = {
   section: string;
@@ -14,7 +15,7 @@ type CitiesCardProps = {
 
 function CityCard({ data, section = Section.DEFAULT, onListItemHover }: CitiesCardProps): JSX.Element {
   const dispatch = useAppDispatch();
-  const authorizationStatus = useAppSelector((state) => state.authorizationStatus);
+  const authorizationStatus = useAppSelector(getAuthorizationStatus);
 
   const {
     isPremium,

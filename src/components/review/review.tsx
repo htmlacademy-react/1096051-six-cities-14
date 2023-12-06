@@ -1,5 +1,7 @@
 import { AuthorizationStatus } from '../../const';
 import { useAppSelector } from '../../hooks';
+import { getCommentList } from '../../store/app-data/app-data.selector';
+import { getAuthorizationStatus } from '../../store/user-process/user-process.selector';
 import { CommentDataType } from '../../types/comment-data-type';
 import { getWidthRatingProperty } from '../../utils/util';
 import ReviewForm from '../review-form/review-form';
@@ -49,8 +51,8 @@ function Comment({ commentData }: CommentProps): JSX.Element {
 }
 
 function Review(): JSX.Element {
-  const commentDataList = useAppSelector((state) => state.commentList);
-  const authorizationStatus = useAppSelector((state) => state.authorizationStatus);
+  const commentDataList = useAppSelector(getCommentList);
+  const authorizationStatus = useAppSelector(getAuthorizationStatus);
 
   return (
     <section className="offer__reviews reviews">
