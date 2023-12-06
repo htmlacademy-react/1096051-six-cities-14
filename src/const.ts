@@ -114,6 +114,12 @@ const UrlMarker = {
   Current: 'https://assets.htmlacademy.ru/content/intensive/javascript-1/demo/interactive-map/main-pin.svg'
 };
 
+const NameSpace = {
+  User: 'USER',
+  Data: 'DATA',
+  Service: 'SERVICE'
+};
+
 export {
   UrlMarker,
   CityNames,
@@ -125,4 +131,5 @@ export {
   PagePaths,
   AuthorizationStatus,
   APIRoute,
+  NameSpace
 };

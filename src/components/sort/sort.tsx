@@ -1,6 +1,7 @@
 import { useAppDispatch, useAppSelector } from '../../hooks';
-import { changeCurrentSort } from '../../store/action';
 import { useState, useEffect } from 'react';
+import { getCurrentSort, getSortNames } from '../../store/app-data/app-data.selector';
+import { changeCurrentSort } from '../../store/app-data/app-data';
 
 type SortItemProps = {
   name: string;
@@ -10,13 +11,13 @@ type SortItemProps = {
 function SortItem({ name, isActive }: SortItemProps): JSX.Element {
   const dispatch = useAppDispatch();
   return (
-    <li onClick={() => dispatch(changeCurrentSort(name))} className={`places__option ${isActive ? 'places__option--active' : ''}`} tabIndex={0}>{name}</li>
+    <li onClick={() => dispatch(changeCurrentSort({currentSort: name}))} className={`places__option ${isActive ? 'places__option--active' : ''}`} tabIndex={0}>{name}</li>
   );
 }
 
 function Sort(): JSX.Element {
-  const currentSort = useAppSelector((state) => state.currentSort);
-  const sortNames = useAppSelector((state) => state.sortNames);
+  const currentSort = useAppSelector(getCurrentSort);
+  const sortNames = useAppSelector(getSortNames);
   const [listIsOpened, setListIsOpened] = useState(false);
 
   const onKeydownEsc = (evt: KeyboardEventInit) => {

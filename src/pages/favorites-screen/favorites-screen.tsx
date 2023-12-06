@@ -4,6 +4,7 @@ import CityList from '../../components/city-list/city-list';
 import { useAppSelector } from '../../hooks';
 import { OfferDataType } from '../../types/offer-data-type';
 import { FavoriteItemDataType } from '../../types/favorite-card-type';
+import { getFavoriteOffersList } from '../../store/app-data/app-data.selector';
 
 function favoriteOffersListToMap(favoriteOffers: OfferDataType[]) {
   const favoriteOffersMap = new Map<string, OfferDataType[]>();
@@ -83,7 +84,7 @@ type FavortitesScreenProps = {
 function FavortitesScreen({
   handleListItemHover
 }: FavortitesScreenProps): JSX.Element {
-  const favoriteOffersList = useAppSelector((state) => state.favoriteOffersList);
+  const favoriteOffersList = useAppSelector(getFavoriteOffersList);
   const favoriteOffersMap: Map<string, OfferDataType[]> = favoriteOffersListToMap(favoriteOffersList);
 
   return (

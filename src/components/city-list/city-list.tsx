@@ -1,4 +1,5 @@
 import { useAppSelector } from '../../hooks';
+import { getCurrentSort, getSortNames } from '../../store/app-data/app-data.selector';
 import { OfferDataType } from '../../types/offer-data-type';
 import { SortNamesType } from '../../types/sort-names-type';
 import CityCard from '../city-card/city-card';
@@ -40,8 +41,8 @@ function CityList({
   section,
   onListItemHover
 }: CityListProps) {
-  const currentSort = useAppSelector((state) => state.currentSort);
-  const sortNames = useAppSelector((state) => state.sortNames);
+  const currentSort = useAppSelector(getCurrentSort);
+  const sortNames = useAppSelector(getSortNames);
 
   const sortedDataList = sortDataList({ dataList, currentSort, sortNames });
 

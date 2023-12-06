@@ -6,6 +6,7 @@ import { Section } from '../../const';
 import { OfferDataType } from '../../types/offer-data-type';
 import CityList from '../../components/city-list/city-list';
 import { useAppSelector } from '../../hooks';
+import { getCurrentCityName, getFilteredOffersList } from '../../store/app-data/app-data.selector';
 
 type SixCitiesScreenProps = {
   onListItemHover: (listItemName: string) => void;
@@ -16,8 +17,8 @@ type SixCitiesScreenProps = {
 function SixCitiesScreen({
   onListItemHover,
   selectedPoint }: SixCitiesScreenProps): JSX.Element {
-  const filteredOffersList = useAppSelector((state) => state.filteredOffersList);
-  const currentCityName = useAppSelector((state) => state.currentCityName);
+  const filteredOffersList = useAppSelector(getFilteredOffersList);
+  const currentCityName = useAppSelector(getCurrentCityName);
 
   return (
     <main className="page__main page__main--index">
